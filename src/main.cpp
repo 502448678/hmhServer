@@ -1,7 +1,10 @@
-#include "ThreadPool.h"
-#include <iostream>
+#include "mysql.h"
+#include "TCPNet.h"
+#include "TCPKernel.h"
+
 int main()
 {
-	cout << "hello world.." << endl;
+	TCPKernel tk;
+	tk.Open();
 	return 0;
 }

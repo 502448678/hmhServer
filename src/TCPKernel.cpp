@@ -26,16 +26,21 @@ bool TCPKernel::Open()
 	//连接数据库
 	if(!m_sql.ConnectMySql((char*)"localhost",(char*)"root",(char*)"199874",(char*)"hmh_server"))
 	{
+		cout <<"MySql connect error.." <<endl;
 		return false;
 	}
+	cout <<"MySql connect success.." <<endl;
 	//加载线程池
 	if(!m_threadpool->InitThreadPool(100,2,100))
 	{
+		cout <<"ThreadPool init error.." <<endl;
 		return false;
 	}
+	cout <<"ThreadPool init success.." <<endl;
 	//连接网络
 	if(!m_pTCPNet->InitNetWork())
 	{
+		cout << "Network init error.."<<endl;
 		return false;
 	}
 	return true;

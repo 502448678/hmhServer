@@ -1,7 +1,7 @@
 #ifndef _PACKDEF_H
 #define _PACKDEF_H
 #include <vector>
-#define SERVER_IP "101.200.180.58"
+#define SERVER_IP "192.168.1.110"
 #define _DEFPORT 2020
 typedef char PackType;
 

@@ -71,7 +71,6 @@ bool ThreadPool::InitThreadPool(int max,int min,int queue_max)
 		}
 		++thread_alive;
 	}
-	cout << "Init ThreadPool sucess.." << endl; ///////////////////////////////////////////
 	return true;
 }
 
@@ -203,7 +202,6 @@ void* ThreadPool::ManagerThreadPool(void* arg)
 				pthread_cond_signal(&pthis->not_empty);
 			}
 		}
-		cout << "alive thread num: "<< pthis->thread_alive << endl;//////////////////////////////
 		sleep(TIME_OUT);
 	}
 	return NULL;

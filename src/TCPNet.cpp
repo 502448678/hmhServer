@@ -40,6 +40,7 @@ bool TCPNet::InitNetWork()
 	
 	int num;
 
+	cout << "Network init success.." << endl;
 	while(1)
 	{
 		num = epoll_wait(epollfds,events,EPOLLSIZE,-1);
@@ -68,6 +69,7 @@ bool TCPNet::InitNetWork()
 
 void TCPNet::UnInitNetWork()
 {
+	//close(sockfd);
 }
 
 int flag = 0;
@@ -107,6 +109,7 @@ void TCPNet::RecvUP(epoll_event event,int epollfd,int c_socket)
 	{
 		//客户端下线或者错误
 		removefd(epollfd,event.data.fd);
+		cout << "removefd .. " <<endl;
 		return;
 	}
 	psbuf = new char[nPackSize];
