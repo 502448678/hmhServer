@@ -18,6 +18,7 @@
 #include <set>
 #include <cstdlib>
 #include <unistd.h>
+#include "RedisTools.h"
 
 using namespace std;
 

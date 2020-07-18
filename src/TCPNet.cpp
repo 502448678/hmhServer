@@ -25,8 +25,8 @@ bool TCPNet::InitNetWork()
 	struct sockaddr_in saddr;
 	bzero(&saddr,sizeof(saddr));
 	saddr.sin_family = AF_INET;
-	saddr.sin_port = htons(SERVER_PORT);
-	saddr.sin_addr.s_addr = inet_addr(SERVER_IP);
+	saddr.sin_port = htons(_DEF_PORT);
+	saddr.sin_addr.s_addr = inet_addr(_DEF_SERVERIP);
 
 	s_socket = socket(AF_INET,SOCK_STREAM,0);
 	bind(s_socket,(struct sockaddr*)&saddr,sizeof(saddr));
