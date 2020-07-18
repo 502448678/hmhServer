@@ -16,8 +16,8 @@ TCPKernel::~TCPKernel()
 
 //协议映射表
 	BEGIN_PROTOCOL_MAP
-	PM(_DEF_PROTOCOL_LOGIN_RQ,&TCPKernel::LoginRq)
-	PM(_DEF_PROTOCOL_REGISTER_RQ,&TCPKernel::RegisterRq)
+	PM(DEF_PACK_LOGIN_RQ,&TCPKernel::LoginRq)
+	PM(DEF_PACK_REGISTER_RQ,&TCPKernel::RegisterRq)
 	END_PROTOCOL_MAP
 
 bool TCPKernel::Open()
