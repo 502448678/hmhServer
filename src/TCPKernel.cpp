@@ -26,11 +26,14 @@ TCPKernel::~TCPKernel()
 	}
 }
 
-//协议映射表
+//=== 协议映射表  ===================================================//
+
 	BEGIN_PROTOCOL_MAP
 	PM(_DEF_PROTOCOL_LOGIN_RQ,&TCPKernel::LoginRq)
 	PM(_DEF_PROTOCOL_REGISTER_RQ,&TCPKernel::RegisterRq)
 	END_PROTOCOL_MAP
+
+//===================================================================//
 
 bool TCPKernel::Open()
 {
@@ -78,26 +81,34 @@ void TCPKernel::Close()
 
 void TCPKernel::DealData(int sock,char* szbuf)
 {
+	cout << "DealData .."<<endl;
 	PackType* pType = (PackType*)szbuf;
 	int i=0;
 	while(1)
 	{
+
 		if(m_ProtocolMapEntries[i].m_nType == *pType)
 		{
+			cout << "m_ProtocalMapEntries["<<i<<"]" <<endl;
 			(this->*m_ProtocolMapEntries[i].m_pfun)(sock,szbuf);
 			break;
 		}
 		else if(m_ProtocolMapEntries[i].m_nType == 0 || m_ProtocolMapEntries[i].m_pfun == 0)
-			break;
+		{
+			//break;
+			cout << "not m_nType to deal.."<<endl;	
+			return;
+		}
 		i++;
 	}
 }
 
 void TCPKernel::RegisterRq(int clientfd,char* szbuf)
 {
-	cout << "clientfd:"<<clientfd<<"RegisterRq"<<endl;
+	cout << "clientfd:"<<clientfd<<" ===> "<<"RegisterRq"<<endl;
 	STRU_REGISTER_RQ * rq = (STRU_REGISTER_RQ *)szbuf;
 	STRU_REGISTER_RS rs;
+	rs.m_nType = _DEF_PROTOCOL_REGISTER_RS;
 
 	rs.m_lResult = _register_fail;
 	//查数据库
@@ -106,44 +117,45 @@ void TCPKernel::RegisterRq(int clientfd,char* szbuf)
 
 	
 	list<string> lstStr;
-	//判斷 是否存在
-	sprintf( szsql , "select name from t_UserData where id = '%lld';",rq->m_userid);
+	//查询数据库中是否有这个人
+	sprintf( szsql , "select email from t_userdata where email = '%s';",rq->m_useremail);
 	cout << szsql <<endl;
 
-	if( m_sql.SelectMySql(szsql , 1 , lstStr ) == false)
-	{
-		err_str("selectsql Fail:\n" , -1);
-		return;
-	}
-	if(lstStr.size() > 0 )
+	if(m_sql.SelectMySql(szsql , 1 , lstStr ))
+
+	//如果存在
+//	if(lstStr.size() > 0 )
 	{
 		rs.m_lResult = _register_userid_is_exist;
+		cout << "user to register has already exist.." << endl;
 	}
-	else{
+
+	//如果没有可以插入
+	else  
+	{
 		
-		sprintf(szsql , "insert into t_UserData(id,name ,password) values('%lld','%s','%s');",rq->m_userid,rq->m_username , rq->m_szPassword);
+		sprintf(szsql , "insert into t_userdata(email,name,password) values('%s','%s','%s');",rq->m_useremail,rq->m_username , rq->m_szPassword);
 
 		cout << szsql << endl;
-		if( m_sql.UpdateMySql( szsql ) == false)
-		{
-		    err_str("UpdataMysql FAIL ",-1);
-		    
-		}
+		
+		m_sql.UpdateMySql( szsql );
+		
 		rs.m_lResult = _register_success;
 	}
 	lstStr.clear();
-
+	cout << "register result:"<<rs.m_lResult<<endl;
 	m_pTCPNet->SendData( clientfd , (char*)&rs , sizeof(rs) );
 
-
+	
 }
 	
 void TCPKernel::LoginRq(int clientfd,char* szbuf)
 {
 
-	cout << "clientfd:"<<clientfd<<"LoginRq"<<endl;	
+	cout << "clientfd:"<<clientfd<<" ===> "<<"LoginRq"<<endl;	
 	STRU_LOGIN_RQ * rq = (STRU_LOGIN_RQ *)szbuf;
 	STRU_LOGIN_RS rs;
+	rs.m_nType = _DEF_PROTOCOL_LOGIN_RS;
 
 	rs.m_lResult = _login_noexist;
 	//查数据库
@@ -152,14 +164,11 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 
 	list<string> lstStr;
 	//判斷 是否存在
-	sprintf( szsql , "select password from t_UserData where id = '%lld';",rq->m_userid);
+	sprintf( szsql , "select password from t_UserData where email = '%s';",rq->m_useremail);
 	cout <<szsql<<endl;
 
-	if( m_sql.SelectMySql(szsql , 1 , lstStr ) == false)
-	{
-		err_str("selectsql Fail:\n",-1);
-		return;
-	}
+	m_sql.SelectMySql(szsql , 1 , lstStr);
+
 	if( lstStr.size() == 0 )
 	{
 		rs.m_lResult = _login_noexist;
@@ -179,7 +188,7 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 
 			//char * id = (char*)q_Pop(pQueue);
 			//rs.m_userid = atoi(id);
-			cout << "UserID:" << rs.m_userid;
+			cout << "UserEmail:" << rs.m_useremail;
 			rs.m_lResult = _login_success;
 
 			// write into redis  用戶id --> 用戶socket ， 用戶名字   id=1 --> 7 , zhangsan  list
@@ -188,22 +197,23 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 			sprintf(sztmp , "%d",clientfd);
 			string strfd = sztmp;
 
-			sprintf( sztmp , "id=%lld" , rs.m_userid);
+			sprintf( sztmp , "email=%s" , rs.m_useremail);
 			string strID = sztmp;
 
 			if( g_Redis->isHashKeyExists(strID) )
 			{
-			rs.m_lResult = _login_user_online;
+				rs.m_lResult = _login_user_online;
 			}else
 			{
-			g_Redis->SetHashValue(  strID,  "fd" , strfd );
-			g_Redis->SetHashValue(  strID,  "id" , rq->m_username );
-			g_Redis->SetHashValue(  strID,  "port" , "0" );
+				g_Redis->SetHashValue(  strID,  "fd" , strfd );
+				g_Redis->SetHashValue(  strID,  "email" , rq->m_useremail );
+				g_Redis->SetHashValue(  strID,  "port" , "0" );
 			}
 		}
 	}
 	lstStr.clear();
 
+	cout << "login result:"<<rs.m_lResult<<endl;
 	m_pTCPNet->SendData( clientfd , (char*)&rs , sizeof(rs) );
 
 	

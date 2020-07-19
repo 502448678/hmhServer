@@ -121,6 +121,9 @@ void TCPNet::RecvUP(epoll_event event,int epollfd,int c_socket)
 		nPackSize -= RealReadNum;
 	}
 	m_pKernel->DealData(c_socket,psbuf);
+
+	cout << "Recv Data size:"<<RealReadNum<<endl;
+
 	delete []psbuf;
 	psbuf = NULL;
 }
@@ -135,6 +138,7 @@ bool TCPNet::SendData(int sock,char* szbuf,int nlen)
 	//包内容
 	if(send(sock,szbuf,nlen,0)<0)
 		return false;
+	cout <<"send data len:"<<nlen<<endl;
 	return true;
 }
 

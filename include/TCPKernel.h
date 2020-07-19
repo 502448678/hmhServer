@@ -23,7 +23,7 @@
 using namespace std;
 
 class TCPKernel;
-typedef void (TCPKernel:: *PFUN)(int,char*);
+typedef void (TCPKernel::*PFUN)(int,char*);
 
 struct ProtocolMap
 {

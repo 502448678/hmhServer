@@ -9,7 +9,7 @@
 #define _DEF_SERVERIP "192.168.1.110"  
 
 //=== 边界值 =====================================================//
-#define _DEF_SIZE 64
+#define _DEF_SIZE 45
 #define _DEF_BUFFERSIZE 1000
 #define _DEF_SQLLEN 256
 
@@ -92,6 +92,7 @@ typedef struct
 {
 	PackType  m_nType;
 	long long m_userid;
+	char      m_useremail[_DEF_SIZE];
 	char	  m_username[_DEF_SIZE];
 	char      m_szPassword[_DEF_SIZE];
 
@@ -101,7 +102,8 @@ typedef struct
 typedef struct
 {
 	PackType   m_nType;
-	long long  m_userid;
+	char       m_useremail[_DEF_SIZE];
+	char       m_username[_DEF_SIZE];
 	char       m_lResult;    //返回结果
 }STRU_LOGIN_RS,STRU_REGISTER_RS;
 
