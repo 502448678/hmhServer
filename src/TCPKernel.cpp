@@ -116,32 +116,39 @@ void TCPKernel::RegisterRq(int clientfd,char* szbuf)
 	bzero( szsql,sizeof(szsql));
 
 	
-	list<string> lstStr;
+//	list<string> lstStr;
 	//查询数据库中是否有这个人
 	sprintf( szsql , "select email from t_userdata where email = '%s';",rq->m_useremail);
 	cout << szsql <<endl;
 
-	if(m_sql.SelectMySql(szsql , 1 , lstStr ))
+	m_sql.SelectMySql(szsql , 1 , lstStr );
 
-	//如果存在
-//	if(lstStr.size() > 0 )
-	{
-		rs.m_lResult = _register_userid_is_exist;
-		cout << "user to register has already exist.." << endl;
-	}
+	cout <<"lstStr.size():"<< lstStr.size() << endl;
 
 	//如果没有可以插入
-	else  
+	if(lstStr.size() == 0)  
 	{
 		
 		sprintf(szsql , "insert into t_userdata(email,name,password) values('%s','%s','%s');",rq->m_useremail,rq->m_username , rq->m_szPassword);
 
 		cout << szsql << endl;
 		
-		m_sql.UpdateMySql( szsql );
+		if(m_sql.UpdateMySql( szsql ))
+		{
+			
+			rs.m_lResult = _register_success;
+		}
+		else
 		
-		rs.m_lResult = _register_success;
+//	}
+	//如果存在
+//	else
+		{
+			rs.m_lResult = _register_userid_is_exist;
+			cout << "user to register has already exist.." << endl;
+		}
 	}
+
 	lstStr.clear();
 	cout << "register result:"<<rs.m_lResult<<endl;
 	m_pTCPNet->SendData( clientfd , (char*)&rs , sizeof(rs) );
@@ -168,7 +175,8 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 	cout <<szsql<<endl;
 
 	m_sql.SelectMySql(szsql , 1 , lstStr);
-
+	
+	cout <<"lstStr.size():"<< lstStr.size() << endl;
 	if( lstStr.size() == 0 )
 	{
 		rs.m_lResult = _login_noexist;
@@ -193,7 +201,7 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 
 			// write into redis  用戶id --> 用戶socket ， 用戶名字   id=1 --> 7 , zhangsan  list
 			// 超時 5s  心跳 3秒一次發送  超時這個key自動消失
-			char sztmp[100];
+/*			char sztmp[100];
 			sprintf(sztmp , "%d",clientfd);
 			string strfd = sztmp;
 
@@ -209,6 +217,7 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 				g_Redis->SetHashValue(  strID,  "email" , rq->m_useremail );
 				g_Redis->SetHashValue(  strID,  "port" , "0" );
 			}
+			*/
 		}
 	}
 	lstStr.clear();
