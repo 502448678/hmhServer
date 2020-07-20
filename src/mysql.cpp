@@ -35,7 +35,7 @@ bool MySql::SelectMySql(char* szSql,int nColumn,list<string>& lstStr)
 
 	if(NULL == results)
 		return false;
-	while(record == mysql_fetch_row(results))
+	while(record = mysql_fetch_row(results))
 	{
 		for(int i=0;i<nColumn;i++)
 		{

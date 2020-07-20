@@ -50,7 +50,6 @@ public:
 	pthread_mutex_t mutex;
 public:
 	MySql m_sql;
-	list<string> lstStr;
 };
 
 #endif

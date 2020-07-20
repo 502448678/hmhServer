@@ -116,14 +116,13 @@ void TCPKernel::RegisterRq(int clientfd,char* szbuf)
 	bzero( szsql,sizeof(szsql));
 
 	
-//	list<string> lstStr;
+	list<string> lstStr;
 	//查询数据库中是否有这个人
 	sprintf( szsql , "select email from t_userdata where email = '%s';",rq->m_useremail);
 	cout << szsql <<endl;
 
 	m_sql.SelectMySql(szsql , 1 , lstStr );
 
-	cout <<"lstStr.size():"<< lstStr.size() << endl;
 
 	//如果没有可以插入
 	if(lstStr.size() == 0)  
@@ -138,16 +137,19 @@ void TCPKernel::RegisterRq(int clientfd,char* szbuf)
 			
 			rs.m_lResult = _register_success;
 		}
-		else
-		
-//	}
-	//如果存在
-//	else
-		{
+		else{
 			rs.m_lResult = _register_userid_is_exist;
-			cout << "user to register has already exist.." << endl;
+
 		}
 	}
+		
+
+	//如果存在
+	else{
+		rs.m_lResult = _register_userid_is_exist;
+		cout << "user to register has already exist.." << endl;
+	}
+	
 
 	lstStr.clear();
 	cout << "register result:"<<rs.m_lResult<<endl;
@@ -171,12 +173,11 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 
 	list<string> lstStr;
 	//判斷 是否存在
-	sprintf( szsql , "select password from t_UserData where email = '%s';",rq->m_useremail);
+	sprintf( szsql , "select password from t_userdata where email = '%s';",rq->m_useremail);
 	cout <<szsql<<endl;
 
 	m_sql.SelectMySql(szsql , 1 , lstStr);
 	
-	cout <<"lstStr.size():"<< lstStr.size() << endl;
 	if( lstStr.size() == 0 )
 	{
 		rs.m_lResult = _login_noexist;
