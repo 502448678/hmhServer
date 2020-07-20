@@ -84,6 +84,7 @@ void* TCPNet::Worker(void* arg)
 	{
 		num = epoll_wait(pthis->epollfd,events,EPOLLSIZE,-1);
 
+		cout <<"epoll_wait num:"<<num<<endl;
 		for(int i=0;i<num;i++)
 		{
 			//如果用户退出，移除sockfd
