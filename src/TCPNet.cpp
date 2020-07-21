@@ -1,4 +1,5 @@
 #include "TCPNet.h"
+#include "log.h"
 IKernel * TCPNet::m_pKernel = NULL;
 
 TCPNet::TCPNet(IKernel *pKernel)
@@ -40,7 +41,8 @@ bool TCPNet::InitNetWork()
 	
 	int num;
 
-	cout << "Network init success.." << endl;
+	//cout << "Network init success.." << endl;
+	LOG_INFO("%s","Network init success..\n");
 	while(1)
 	{
 		num = epoll_wait(epollfds,events,EPOLLSIZE,-1);
@@ -52,12 +54,14 @@ bool TCPNet::InitNetWork()
 			int c_socket = accept(s_socket,(struct sockaddr*)&caddr,&size);
 			if(c_socket < 0)
 			{
-				cout << "connect failed" <<endl;
+				//cout << "connect failed" <<endl;
+				LOG_ERROR("%d", "Network connect failed..\n");
 				continue;
 			}
 			else
 			{
-				cout << "epoll accept success.." << endl;
+				//cout << "epoll accept success.." << endl;
+				LOG_INFO("%s", "epoll accept success..\n");
 			}
 			addfd(epollfd,c_socket);
 			m_threadpool->AddTask(Worker,(void*)this);
@@ -75,7 +79,8 @@ void TCPNet::UnInitNetWork()
 int flag = 0;
 void* TCPNet::Worker(void* arg)
 {
-	cout << "work +1" <<endl;
+//	cout << "work +1" <<endl;
+	LOG_INFO("s","work+1..\n");
 	TCPNet* pthis = (TCPNet*)arg;
 	epoll_event events[MAX_EVENTS];
 	int num = 0;
@@ -84,7 +89,9 @@ void* TCPNet::Worker(void* arg)
 	{
 		num = epoll_wait(pthis->epollfd,events,EPOLLSIZE,-1);
 
-		cout <<"epoll_wait num:"<<num<<endl;
+//		cout <<"epoll_wait num:"<<num<<endl;
+
+		LOG_INFO("%s%d\n","epoll_wait num:",num);
 		for(int i=0;i<num;i++)
 		{
 			//如果用户退出，移除sockfd
@@ -110,7 +117,8 @@ void TCPNet::RecvUP(epoll_event event,int epollfd,int c_socket)
 	{
 		//客户端下线或者错误
 		removefd(epollfd,event.data.fd);
-		cout << "removefd .. " <<endl;
+		//cout << "removefd .. " <<endl;
+		LOG_INFO("%s","removefd .. \n");
 		return;
 	}
 	psbuf = new char[nPackSize];
@@ -123,7 +131,8 @@ void TCPNet::RecvUP(epoll_event event,int epollfd,int c_socket)
 	}
 	m_pKernel->DealData(c_socket,psbuf);
 
-	cout << "Recv Data size:"<<RealReadNum<<endl;
+//	cout << "Recv Data size:"<<RealReadNum<<endl;
+	LOG_INFO("%s%d\n","Recv data size:",RealReadNum);
 
 	delete []psbuf;
 	psbuf = NULL;
@@ -139,7 +148,8 @@ bool TCPNet::SendData(int sock,char* szbuf,int nlen)
 	//包内容
 	if(send(sock,szbuf,nlen,0)<0)
 		return false;
-	cout <<"send data len:"<<nlen<<endl;
+//	cout <<"send data len:"<<nlen<<endl;
+	LOG_INFO("%s%d\n","Send data size:",nlen);
 	return true;
 }
 
