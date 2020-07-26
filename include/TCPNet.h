@@ -26,9 +26,15 @@ public:
 	bool SendData(int sock,char* szbuf,int nlen);
 public:
 	void RecvUP(epoll_event,int,int);
-	void addfd(int epollfd,int fd);
+	void addfd(int epollfd,int fd,int enable_et);
 	void removefd(int,int);
 	static void* Worker(void* arg);
+/*
+	static void* Epoll_Jobs(void * arg);
+	void Epoll_Deal(int ready);
+	void* Accept_Deal(void* arg);
+*/
+	void FlushLog();
 public:
 	int s_socket;
 	ThreadPool* m_threadpool;

@@ -1,5 +1,5 @@
 #include "ThreadPool.h"
-
+#include "log.h"
 ThreadPool* ThreadPool::m_instance = NULL;
 
 ThreadPool::ThreadPool()
@@ -104,6 +104,7 @@ bool ThreadPool::AddTask(void* (*task)(void*),void* arg)
 	pthread_cond_signal(&not_empty);
 	pthread_mutex_unlock(&lock_task);
 	cout << "Add Task success .." << endl;
+//	LOG_INFO("%s%d\n","Add Task success .. queue_head:",queue_head);
 	return true;
 }
 

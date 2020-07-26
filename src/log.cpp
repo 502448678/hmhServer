@@ -82,7 +82,7 @@ void Log::write_log(int level, const char* format, ...)
 	int n = snprintf(m_buf, 48, "%d-%02d-%02d %02d:%02d:%02d.%06ld %s ",
 		my_tm.tm_year+1900, my_tm.tm_mon+1, my_tm.tm_mday,
 		my_tm.tm_hour, my_tm.tm_min, my_tm.tm_sec, now.tv_usec, s);
- 
+//=== lock ======================================================================= 
 	pthread_mutex_lock(m_mutex);
 	m_count++;
 	if(m_today != my_tm.tm_mday || m_count % m_split_lines == 0) //everyday log
@@ -105,15 +105,19 @@ void Log::write_log(int level, const char* format, ...)
 		m_fp = fopen(new_log, "a");
 	}
 	pthread_mutex_unlock(m_mutex);
+//=== unlock ========================================================================
 	
 	va_list valst;
 	va_start(valst, format);
  
+ 
+//=== lock ======================================================================= 
 	pthread_mutex_lock(m_mutex);
 	vsnprintf(m_buf + n, m_log_buf_size-1, format, valst);
 	//m_buf[n + m - 1] = '\n';
 	fputs(m_buf, m_fp);
 	pthread_mutex_unlock(m_mutex);
+//=== unlock ========================================================================
  
 	va_end(valst);
 }

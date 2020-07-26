@@ -12,6 +12,8 @@
 #define _DEF_SIZE 45
 #define _DEF_BUFFERSIZE 1000
 #define _DEF_SQLLEN 256
+#define _DEF_EPOLLSIZE 4096
+#define _DEF_IPSIZE 16
 
 //=== 协议映射 ===================================================//
 

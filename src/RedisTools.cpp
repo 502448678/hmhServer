@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sstream>
 #include <stdlib.h>
-
+#include "log.h"
 RedisTool::RedisTool()
 {
     m_redis = NULL;
@@ -24,23 +24,28 @@ void RedisTool::init()
     struct timeval timeout = { 1, 500000 }; // 1.5 seconds 设置连接等待时间
     char ip[255];
     strcpy(ip, m_config.getRedisIP().c_str());
-    cout << "init : ip = " << ip << endl;
+   // cout << "init : ip = " << ip << endl;
+	LOG_INFO("Redis Init:ip = %s\n",ip);
     m_redis = redisConnectWithTimeout(ip, m_config.getRedisPort(), timeout);//建立连接
     if (m_redis->err)
     {
-        printf("RedisTool : Connection error: %s\n", m_redis->errstr);
+       // printf("RedisTool : Connection error: %s\n", m_redis->errstr);
+
+	   LOG_ERROR("RedisTool:Connection error: %s\n",m_redis->errstr);
     }
     else
     {
-        cout << "init redis tool success " << endl;
+       // cout << "init redis tool success " << endl;
+		LOG_INFO("%s","Redis tool init success..\n");
         //REDIS_REPLY响应的类型type
-        cout << "#define REDIS_REPLY_STRING 1"<< endl;
+/*        cout << "#define REDIS_REPLY_STRING 1"<< endl;
         cout << "#define REDIS_REPLY_ARRAY 2"<< endl;
         cout << "#define REDIS_REPLY_INTEGER 3"<< endl;
         cout << "#define REDIS_REPLY_NIL 4"<< endl;
         cout << "#define REDIS_REPLY_STATUS 5"<< endl;
         cout << "#define REDIS_REPLY_ERROR 6"<< endl;
-    }
+*/  
+  	}
 }
 
 //向数据库写入string类型数据

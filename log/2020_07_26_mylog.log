@@ -1,0 +1,61 @@
+2020-07-26 10:18:59.369282 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 10:18:59.369315 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 10:18:59.370032 [info]: Redis tool init success..
+2020-07-26 10:18:59.375166 [info]: MySql connect success..
+2020-07-26 10:18:59.376691 [info]: ThreadPool init success..
+2020-07-26 10:18:59.377234 [erro]: Network init error..
+2020-07-26 10:21:02.430070 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 10:21:02.430105 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 10:21:02.430503 [info]: Redis tool init success..
+2020-07-26 10:21:02.434423 [info]: MySql connect success..
+2020-07-26 10:21:02.435646 [info]: ThreadPool init success..
+2020-07-26 10:21:02.435746 [erro]: Network init error..
+2020-07-26 10:30:42.241422 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 10:30:42.241468 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 10:30:42.241868 [info]: Redis tool init success..
+2020-07-26 10:30:42.245055 [info]: MySql connect success..
+2020-07-26 10:30:42.245919 [info]: ThreadPool init success..
+2020-07-26 10:30:42.246284 [info]: Network init success..
+2020-07-26 10:39:17.527795 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 10:39:17.527827 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 10:39:17.528364 [info]: Redis tool init success..
+2020-07-26 10:39:17.531925 [info]: MySql connect success..
+2020-07-26 10:39:17.532668 [info]: ThreadPool init success..
+2020-07-26 10:39:17.532769 [info]: Network init success..
+2020-07-26 10:41:55.045884 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 10:41:55.045924 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 10:41:55.046180 [info]: Redis tool init success..
+2020-07-26 10:41:55.050974 [info]: MySql connect success..
+2020-07-26 10:41:55.052145 [info]: ThreadPool init success..
+2020-07-26 10:41:55.052462 [info]: Network init success..
+2020-07-26 10:42:07.692623 [info]: clientfd:9 ===> LoginRq
+2020-07-26 10:42:07.692800 [info]: select password from t_userdata where email = '1234';
+2020-07-26 10:42:12.993776 [info]: clientfd:9 ===> LoginRq
+2020-07-26 10:42:12.993834 [info]: select password from t_userdata where email = '12345123';
+2020-07-26 10:42:12.995029 [info]: login user not exist
+2020-07-26 10:42:17.632592 [info]: clientfd:9 ===> LoginRq
+2020-07-26 10:42:17.632740 [info]: select password from t_userdata where email = '123';
+2020-07-26 10:42:17.633600 [info]: select name from t_userdata where email = '123';
+2020-07-26 10:42:17.634400 [info]: Login success..  login rs name:123
+2020-07-26 10:43:05.290862 [info]: removefd:9
+2020-07-26 10:45:25.698679 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 10:45:25.698729 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 10:45:25.699145 [info]: Redis tool init success..
+2020-07-26 10:45:25.703581 [info]: MySql connect success..
+2020-07-26 10:45:25.704454 [info]: ThreadPool init success..
+2020-07-26 10:45:25.704635 [info]: Network init success..
+2020-07-26 10:45:49.032057 [info]: clientfd:9 ===> RegisterRq
+2020-07-26 10:45:49.032159 [info]: select email from t_userdata where email = '123';
+2020-07-26 10:46:00.779161 [info]: clientfd:9 ===> RegisterRq
+2020-07-26 10:46:00.779259 [info]: select email from t_userdata where email = '123';
+2020-07-26 10:46:05.159439 [info]: clientfd:9 ===> RegisterRq
+2020-07-26 10:46:05.159497 [info]: select email from t_userdata where email = '1234';
+2020-07-26 10:46:08.807262 [info]: clientfd:9 ===> RegisterRq
+2020-07-26 10:46:08.807320 [info]: select email from t_userdata where email = '12';
+2020-07-26 10:46:08.808398 [info]: insert into t_userdata(email,name,password) values('12','12','ad90103a6daa2d46f6ca32753f5bd8cd');
+2020-07-26 10:46:30.103295 [info]: clientfd:9 ===> LoginRq
+2020-07-26 10:46:30.103441 [info]: select password from t_userdata where email = '1234';
+2020-07-26 10:47:06.175772 [info]: clientfd:9 ===> LoginRq
+2020-07-26 10:47:06.175839 [info]: select password from t_userdata where email = '123';
+2020-07-26 10:47:06.176904 [info]: select name from t_userdata where email = '123';
+2020-07-26 10:47:06.177868 [info]: Login success..  login rs name:123

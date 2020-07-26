@@ -1,0 +1,595 @@
+2020-07-21 14:05:34.008410 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:05:34.008455 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:05:34.008782 [info]: Redis tool init success..
+2020-07-21 14:05:34.010946 [info]: MySql connect success..
+2020-07-21 14:05:34.011542 [info]: ThreadPool init success..
+2020-07-21 14:05:34.011596 [info]: Network init success..
+2020-07-21 14:05:39.201598 [info]: epoll accept success..
+2020-07-21 14:05:39.201810 [info]: Add Task success .. queue_head:1
+2020-07-21 14:05:39.201938 [info]: work+1..
+2020-07-21 14:06:01.242416 [info]: epoll_wait num:1
+2020-07-21 14:06:01.245467 [info]: DealData ..
+2020-07-21 14:06:01.245534 [info]: m_ProtocalMapEntries[0]
+2020-07-21 14:06:01.245554 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:06:01.245599 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:06:01.248301 [info]: select name from t_userdata where email = '123';
+2020-07-21 14:06:01.249243 [info]: Login success..  login rs name:123
+2020-07-21 14:12:23.473104 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:12:23.473193 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:12:23.473490 [info]: Redis tool init success..
+2020-07-21 14:12:23.477426 [info]: MySql connect success..
+2020-07-21 14:12:23.477956 [info]: ThreadPool init success..
+2020-07-21 14:12:23.478167 [info]: Network init success..
+2020-07-21 14:14:56.840637 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:14:56.840714 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:14:56.841408 [info]: Redis tool init success..
+2020-07-21 14:14:56.844320 [info]: MySql connect success..
+2020-07-21 14:14:56.844893 [info]: ThreadPool init success..
+2020-07-21 14:14:56.845049 [info]: Network init success..
+2020-07-21 14:15:15.040514 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:15:15.040571 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:15:15.040935 [info]: Redis tool init success..
+2020-07-21 14:15:15.043492 [info]: MySql connect success..
+2020-07-21 14:15:15.043999 [info]: ThreadPool init success..
+2020-07-21 14:15:15.044092 [info]: Network init success..
+2020-07-21 14:17:03.107372 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:17:03.107496 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:17:03.107931 [info]: Redis tool init success..
+2020-07-21 14:17:03.111396 [info]: MySql connect success..
+2020-07-21 14:17:03.111952 [info]: ThreadPool init success..
+2020-07-21 14:17:03.112055 [info]: Network init success..
+2020-07-21 14:17:12.243384 [info]: epoll accept success..
+2020-07-21 14:17:12.243563 [info]: Add Task success .. queue_head:1
+2020-07-21 14:17:23.727754 [info]: epoll_wait num:1
+2020-07-21 14:17:23.728127 [info]: removefd:9
+2020-07-21 14:17:32.763303 [info]: epoll accept success..
+2020-07-21 14:17:32.763616 [info]: Add Task success .. queue_head:2
+2020-07-21 14:17:57.536758 [info]: epoll_wait num:1
+2020-07-21 14:17:57.536782 [info]: epoll_wait num:1
+2020-07-21 14:17:57.539252 [info]: DealData ..
+2020-07-21 14:17:57.539308 [info]: m_ProtocalMapEntries[0]
+2020-07-21 14:17:57.539325 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:17:57.539363 [info]: select password from t_userdata where email = '1234';
+2020-07-21 14:17:57.541251 [info]: select name from t_userdata where email = '1234';
+2020-07-21 14:17:57.541959 [info]: Login success..  login rs name:1234
+2020-07-21 14:19:48.235198 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:19:48.235426 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:19:48.235845 [info]: Redis tool init success..
+2020-07-21 14:19:48.239445 [info]: MySql connect success..
+2020-07-21 14:19:48.239904 [info]: ThreadPool init success..
+2020-07-21 14:19:54.938114 [info]: Add Task success .. queue_head:1
+2020-07-21 14:20:00.597011 [info]: DealData ..
+2020-07-21 14:20:00.597123 [info]: m_ProtocalMapEntries[0]
+2020-07-21 14:20:00.597150 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:20:00.597282 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:20:00.599039 [info]: select name from t_userdata where email = '123';
+2020-07-21 14:20:00.599779 [info]: Login success..  login rs name:123
+2020-07-21 14:20:00.600289 [info]: Send data size:92
+2020-07-21 14:20:00.600350 [info]: Recv data size:152
+2020-07-21 14:20:07.225376 [info]: removefd:9
+2020-07-21 14:22:24.111052 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:22:24.111090 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:22:24.111241 [info]: Redis tool init success..
+2020-07-21 14:22:29.692119 [info]: Add Task success .. queue_head:1
+2020-07-21 14:22:35.172609 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:22:35.176723 [info]: Send data size:92
+2020-07-21 14:22:35.176821 [info]: Recv data size:152
+2020-07-21 14:22:42.862898 [info]: removefd:9
+2020-07-21 14:24:08.895109 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:24:08.895171 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:24:08.895558 [info]: Redis tool init success..
+2020-07-21 14:24:08.898738 [info]: Network init success..
+2020-07-21 14:24:14.092784 [info]: Add Task success .. queue_head:1
+2020-07-21 14:24:19.403607 [info]: epoll_wait num:1
+2020-07-21 14:24:19.406399 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:24:22.542232 [info]: epoll_wait num:1
+2020-07-21 14:24:22.542360 [info]: removefd:9
+2020-07-21 14:25:23.896435 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:25:23.896690 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:25:23.897089 [info]: Redis tool init success..
+2020-07-21 14:25:23.900081 [info]: MySql connect success..
+2020-07-21 14:25:23.900909 [info]: ThreadPool init success..
+2020-07-21 14:25:23.901165 [info]: Network init success..
+2020-07-21 14:25:28.556325 [info]: Add Task success .. queue_head:1
+2020-07-21 14:25:33.753100 [info]: epoll_wait num:1
+2020-07-21 14:25:33.755571 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:25:36.501322 [info]: epoll_wait num:1
+2020-07-21 14:25:36.501455 [info]: removefd:9
+2020-07-21 14:26:01.182830 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:26:01.182901 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:26:01.183288 [info]: Redis tool init success..
+2020-07-21 14:26:01.187750 [info]: MySql connect success..
+2020-07-21 14:26:01.188125 [info]: ThreadPool init success..
+2020-07-21 14:26:01.188293 [info]: Network init success..
+2020-07-21 14:26:06.006906 [info]: Add Task success .. queue_head:1
+2020-07-21 14:26:10.626233 [info]: epoll_wait num:1
+2020-07-21 14:26:10.628260 [info]: DealData ..
+2020-07-21 14:26:10.628411 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:26:12.184485 [info]: epoll_wait num:1
+2020-07-21 14:26:12.184614 [info]: removefd:9
+2020-07-21 14:28:03.884019 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:28:03.884116 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:28:03.884589 [info]: Redis tool init success..
+2020-07-21 14:28:03.889135 [info]: MySql connect success..
+2020-07-21 14:28:03.889791 [info]: ThreadPool init success..
+2020-07-21 14:28:03.889950 [info]: Network init success..
+2020-07-21 14:28:09.584538 [info]: Add Task success .. queue_head:1
+2020-07-21 14:28:15.727457 [info]: epoll_wait num:1
+2020-07-21 14:28:15.729926 [info]: DealData ..
+2020-07-21 14:28:15.729999 [info]: m_ProtocalMapEntries[0]
+2020-07-21 14:28:15.730021 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:28:19.182593 [info]: epoll_wait num:1
+2020-07-21 14:28:19.182867 [info]: removefd:9
+2020-07-21 14:29:31.143893 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:29:31.143974 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:29:31.144187 [info]: Redis tool init success..
+2020-07-21 14:29:31.147771 [info]: MySql connect success..
+2020-07-21 14:29:31.148244 [info]: ThreadPool init success..
+2020-07-21 14:29:31.148497 [info]: Network init success..
+2020-07-21 14:29:36.826661 [info]: Add Task success .. queue_head:1
+2020-07-21 14:29:41.905500 [info]: epoll_wait num:1
+2020-07-21 14:29:41.907306 [info]: DealData ..
+2020-07-21 14:29:41.907414 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:29:44.952006 [info]: epoll_wait num:1
+2020-07-21 14:29:44.952129 [info]: removefd:9
+2020-07-21 14:31:10.105530 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:31:10.105623 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:31:10.106224 [info]: Redis tool init success..
+2020-07-21 14:31:10.110881 [info]: MySql connect success..
+2020-07-21 14:31:10.111292 [info]: ThreadPool init success..
+2020-07-21 14:31:10.111379 [info]: Network init success..
+2020-07-21 14:31:15.646055 [info]: Add Task success .. queue_head:1
+2020-07-21 14:31:20.412524 [info]: epoll_wait num:1
+2020-07-21 14:31:20.414474 [info]: DealData ..
+2020-07-21 14:31:20.414668 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:31:20.414743 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:31:20.416088 [info]: select name from t_userdata where email = '123';
+2020-07-21 14:31:20.416774 [info]: Login success..  login rs name:123
+2020-07-21 14:31:21.713560 [info]: epoll_wait num:1
+2020-07-21 14:31:21.713773 [info]: removefd:9
+2020-07-21 14:40:28.266132 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:40:28.266208 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:40:28.266728 [info]: Redis tool init success..
+2020-07-21 14:40:28.270947 [info]: MySql connect success..
+2020-07-21 14:40:28.271547 [info]: ThreadPool init success..
+2020-07-21 14:40:28.271644 [info]: Network init success..
+2020-07-21 14:40:39.426659 [info]: epoll accept success..
+2020-07-21 14:40:39.426947 [info]: Add Task success .. queue_head:1
+2020-07-21 14:40:39.426994 [info]: TCPNet Work+1..
+2020-07-21 14:40:45.285685 [info]: epoll_wait num:1
+2020-07-21 14:40:45.288164 [info]: DealData ..
+2020-07-21 14:40:45.288313 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:40:45.288369 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:40:45.289624 [info]: select name from t_userdata where email = '123';
+2020-07-21 14:40:45.290267 [info]: Login success..  login rs name:123
+2020-07-21 14:40:45.290628 [info]: Send data size:92
+2020-07-21 14:40:45.290732 [info]: Recv data size:152
+2020-07-21 14:40:47.972336 [info]: epoll_wait num:1
+2020-07-21 14:40:47.972582 [info]: removefd:9
+2020-07-21 14:40:51.943872 [info]: epoll accept success..
+2020-07-21 14:40:51.944063 [info]: Add Task success .. queue_head:2
+2020-07-21 14:40:51.944306 [info]: TCPNet Work+1..
+2020-07-21 14:40:57.200320 [info]: epoll_wait num:1
+2020-07-21 14:40:57.200401 [info]: epoll_wait num:1
+2020-07-21 14:40:57.202167 [info]: DealData ..
+2020-07-21 14:40:57.202356 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:40:57.202426 [info]: select password from t_userdata where email = '123124124';
+2020-07-21 14:40:57.203535 [info]: Send data size:92
+2020-07-21 14:40:57.203603 [info]: Recv data size:152
+2020-07-21 14:41:12.337998 [info]: epoll_wait num:1
+2020-07-21 14:41:12.338012 [info]: DealData ..
+2020-07-21 14:41:12.338355 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:41:12.338401 [info]: select password from t_userdata where email = '3123124124';
+2020-07-21 14:41:12.339551 [info]: Send data size:92
+2020-07-21 14:41:12.339627 [info]: Recv data size:152
+2020-07-21 14:41:17.329281 [info]: epoll_wait num:1
+2020-07-21 14:41:20.340930 [info]: DealData ..
+2020-07-21 14:41:20.341022 [warn]: not m_nType to deal..
+2020-07-21 14:41:20.341041 [info]: Recv data size:148
+2020-07-21 14:50:18.741476 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 14:50:18.741552 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 14:50:18.741842 [info]: Redis tool init success..
+2020-07-21 14:50:18.747175 [info]: MySql connect success..
+2020-07-21 14:50:18.747883 [info]: ThreadPool init success..
+2020-07-21 14:50:18.748043 [info]: Network init success..
+2020-07-21 14:50:43.411112 [info]: epoll accept success..
+2020-07-21 14:50:43.411304 [info]: Add Task success .. queue_head:1
+2020-07-21 14:50:43.411463 [info]: TCPNet Work+1..
+2020-07-21 14:50:49.162365 [info]: epoll_wait num:1
+2020-07-21 14:50:49.164682 [info]: DealData ..
+2020-07-21 14:50:49.164948 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:50:49.165022 [info]: select password from t_userdata where email = '123124123123';
+2020-07-21 14:50:49.166683 [info]: login user not exist
+2020-07-21 14:50:49.167020 [info]: Send data size:92
+2020-07-21 14:50:49.167074 [info]: Recv data size:152
+2020-07-21 14:50:54.601607 [info]: epoll_wait num:1
+2020-07-21 14:50:54.603510 [info]: DealData ..
+2020-07-21 14:50:54.603678 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:50:54.603759 [info]: select password from t_userdata where email = '1232141';
+2020-07-21 14:50:54.605428 [info]: login user not exist
+2020-07-21 14:50:54.605778 [info]: Send data size:92
+2020-07-21 14:50:54.605836 [info]: Recv data size:152
+2020-07-21 14:50:59.926539 [info]: epoll_wait num:1
+2020-07-21 14:50:59.929266 [info]: DealData ..
+2020-07-21 14:50:59.929500 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:50:59.929550 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:50:59.931046 [info]: Send data size:92
+2020-07-21 14:50:59.931321 [info]: Recv data size:152
+2020-07-21 14:51:10.344987 [info]: epoll_wait num:1
+2020-07-21 14:51:10.392211 [info]: DealData ..
+2020-07-21 14:51:10.392527 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:51:10.392601 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:51:10.393663 [info]: select name from t_userdata where email = '123';
+2020-07-21 14:51:10.394437 [info]: Login success..  login rs name:123
+2020-07-21 14:51:10.394699 [info]: Send data size:92
+2020-07-21 14:51:10.394745 [info]: Recv data size:152
+2020-07-21 14:51:12.091067 [info]: epoll_wait num:1
+2020-07-21 14:51:12.091270 [info]: removefd:9
+2020-07-21 14:51:16.416056 [info]: epoll accept success..
+2020-07-21 14:51:16.416153 [info]: Add Task success .. queue_head:2
+2020-07-21 14:51:16.416233 [info]: TCPNet Work+1..
+2020-07-21 14:51:27.771664 [info]: epoll_wait num:1
+2020-07-21 14:51:27.774614 [info]: epoll_wait num:1
+2020-07-21 14:51:27.774636 [info]: DealData ..
+2020-07-21 14:51:27.774808 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:51:27.774988 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:51:27.776002 [info]: Send data size:92
+2020-07-21 14:51:27.776175 [info]: Recv data size:152
+2020-07-21 14:51:32.672473 [info]: epoll_wait num:1
+2020-07-21 14:51:32.674957 [info]: DealData ..
+2020-07-21 14:51:32.675116 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:51:32.675222 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:51:32.676180 [info]: select name from t_userdata where email = '123';
+2020-07-21 14:51:32.676898 [info]: Login success..  login rs name:123
+2020-07-21 14:51:32.677321 [info]: Send data size:92
+2020-07-21 14:51:32.677376 [info]: Recv data size:152
+2020-07-21 14:51:34.087314 [info]: epoll_wait num:1
+2020-07-21 14:51:34.087763 [info]: removefd:9
+2020-07-21 14:51:34.087446 [info]: removefd:9
+2020-07-21 14:51:38.202996 [info]: epoll accept success..
+2020-07-21 14:51:38.203191 [info]: Add Task success .. queue_head:3
+2020-07-21 14:51:38.203298 [info]: TCPNet Work+1..
+2020-07-21 14:51:44.570760 [info]: epoll_wait num:1
+2020-07-21 14:51:44.570861 [info]: epoll_wait num:1
+2020-07-21 14:51:47.814719 [info]: epoll_wait num:1
+2020-07-21 14:51:47.814877 [info]: removefd:9
+2020-07-21 14:52:00.468237 [info]: epoll accept success..
+2020-07-21 14:52:00.468333 [info]: Add Task success .. queue_head:4
+2020-07-21 14:52:00.776923 [info]: TCPNet Work+1..
+2020-07-21 14:52:11.041298 [info]: epoll_wait num:1
+2020-07-21 14:52:11.043756 [info]: epoll_wait num:1
+2020-07-21 14:52:28.901747 [info]: DealData ..
+2020-07-21 14:52:28.901917 [info]: clientfd:9 ===> LoginRq
+2020-07-21 14:52:28.901989 [info]: select password from t_userdata where email = '123';
+2020-07-21 14:52:28.902689 [info]: select name from t_userdata where email = '123';
+2020-07-21 14:52:28.905134 [info]: Login success..  login rs name:123
+2020-07-21 14:52:28.905365 [info]: Send data size:92
+2020-07-21 14:52:28.905438 [info]: Recv data size:152
+2020-07-21 15:04:05.984088 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:04:05.984178 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:04:05.984543 [info]: Redis tool init success..
+2020-07-21 15:04:05.988641 [info]: MySql connect success..
+2020-07-21 15:04:05.989146 [info]: ThreadPool init success..
+2020-07-21 15:04:05.989247 [info]: Network init success..
+2020-07-21 15:04:21.275581 [info]: epoll accept success..
+2020-07-21 15:04:21.275817 [info]: Add Task success .. queue_head:1
+2020-07-21 15:04:21.275995 [info]: TCPNet Work+1..
+2020-07-21 15:04:21.276266 [info]: epoll_wait num:1
+2020-07-21 15:04:21.280204 [info]: DealData ..
+2020-07-21 15:04:21.280337 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:04:21.280387 [info]: select password from t_userdata where email = '123412312';
+2020-07-21 15:04:21.281959 [info]: login user not exist
+2020-07-21 15:04:21.282192 [info]: Send data size:92
+2020-07-21 15:04:21.282231 [info]: Recv data size:152
+2020-07-21 15:04:31.442345 [info]: epoll_wait num:1
+2020-07-21 15:04:31.444805 [info]: DealData ..
+2020-07-21 15:04:31.445020 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:04:31.445068 [info]: select password from t_userdata where email = '123';
+2020-07-21 15:04:31.446475 [info]: select name from t_userdata where email = '123';
+2020-07-21 15:04:31.447241 [info]: Login success..  login rs name:123
+2020-07-21 15:04:31.447472 [info]: Send data size:92
+2020-07-21 15:04:31.447511 [info]: Recv data size:152
+2020-07-21 15:04:33.558221 [info]: epoll_wait num:1
+2020-07-21 15:04:33.558311 [info]: removefd:9
+2020-07-21 15:05:24.124653 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:05:24.124747 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:05:24.125493 [info]: Redis tool init success..
+2020-07-21 15:05:24.128246 [info]: MySql connect success..
+2020-07-21 15:05:24.128611 [info]: ThreadPool init success..
+2020-07-21 15:05:24.128677 [info]: Network init success..
+2020-07-21 15:05:31.243019 [info]: epoll accept success..
+2020-07-21 15:05:31.243192 [info]: Add Task success .. queue_head:1
+2020-07-21 15:05:31.243380 [info]: TCPNet Work+1..
+2020-07-21 15:05:37.445189 [info]: epoll_wait num:1
+2020-07-21 15:05:37.447674 [info]: DealData ..
+2020-07-21 15:05:37.447920 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:05:37.447980 [info]: select password from t_userdata where email = '1232313';
+2020-07-21 15:05:37.448966 [info]: login user not exist
+2020-07-21 15:05:37.449244 [info]: Send data size:92
+2020-07-21 15:05:37.449290 [info]: Recv data size:152
+2020-07-21 15:05:44.148973 [info]: epoll_wait num:1
+2020-07-21 15:05:44.151067 [info]: DealData ..
+2020-07-21 15:05:44.151168 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:05:44.151222 [info]: select password from t_userdata where email = '123';
+2020-07-21 15:05:44.151843 [info]: select name from t_userdata where email = '123';
+2020-07-21 15:05:44.152315 [info]: Login success..  login rs name:123
+2020-07-21 15:05:44.152468 [info]: Send data size:92
+2020-07-21 15:05:44.152497 [info]: Recv data size:152
+2020-07-21 15:05:52.521722 [info]: epoll_wait num:1
+2020-07-21 15:05:52.521901 [info]: removefd:9
+2020-07-21 15:11:13.418709 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:11:13.419029 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:11:13.419688 [info]: Redis tool init success..
+2020-07-21 15:11:13.423922 [info]: MySql connect success..
+2020-07-21 15:11:13.424318 [info]: ThreadPool init success..
+2020-07-21 15:11:13.424400 [info]: Network init success..
+2020-07-21 15:11:22.244496 [info]: epoll accept success..
+2020-07-21 15:11:22.244678 [info]: Add Task success .. queue_head:1
+2020-07-21 15:11:22.244744 [info]: TCPNet Work+1..
+2020-07-21 15:11:30.571352 [info]: epoll_wait num:1
+2020-07-21 15:11:30.573497 [info]: DealData ..
+2020-07-21 15:11:30.573675 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:11:30.573809 [info]: select password from t_userdata where email = '12341231';
+2020-07-21 15:11:30.574865 [info]: login user not exist
+2020-07-21 15:11:30.575021 [info]: Send data size:92
+2020-07-21 15:11:30.575049 [info]: Recv data size:152
+2020-07-21 15:11:42.792229 [info]: epoll_wait num:1
+2020-07-21 15:11:42.794589 [info]: DealData ..
+2020-07-21 15:11:42.794737 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:11:42.794838 [info]: select password from t_userdata where email = '123';
+2020-07-21 15:11:42.795459 [info]: select name from t_userdata where email = '123';
+2020-07-21 15:11:42.795987 [info]: Login success..  login rs name:123
+2020-07-21 15:11:42.796207 [info]: Send data size:92
+2020-07-21 15:11:42.796245 [info]: Recv data size:152
+2020-07-21 15:11:44.138625 [info]: epoll_wait num:1
+2020-07-21 15:11:44.138775 [info]: removefd:9
+2020-07-21 15:11:47.741174 [info]: epoll accept success..
+2020-07-21 15:11:47.741268 [info]: Add Task success .. queue_head:2
+2020-07-21 15:11:47.741370 [info]: TCPNet Work+1..
+2020-07-21 15:11:51.719054 [info]: epoll_wait num:1
+2020-07-21 15:11:51.719157 [info]: epoll_wait num:1
+2020-07-21 15:11:59.253612 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:11:59.253653 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:11:59.253821 [info]: Redis tool init success..
+2020-07-21 15:11:59.255826 [info]: MySql connect success..
+2020-07-21 15:11:59.256231 [info]: ThreadPool init success..
+2020-07-21 15:11:59.256299 [info]: Network init success..
+2020-07-21 15:12:05.219324 [info]: epoll accept success..
+2020-07-21 15:12:05.219426 [info]: Add Task success .. queue_head:1
+2020-07-21 15:12:05.219519 [info]: TCPNet Work+1..
+2020-07-21 15:12:09.960883 [info]: epoll_wait num:1
+2020-07-21 15:12:09.962802 [info]: DealData ..
+2020-07-21 15:12:09.962973 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:12:09.963097 [info]: select password from t_userdata where email = '123';
+2020-07-21 15:12:09.964540 [info]: select name from t_userdata where email = '123';
+2020-07-21 15:12:09.965384 [info]: Login success..  login rs name:123
+2020-07-21 15:12:09.965763 [info]: Send data size:92
+2020-07-21 15:12:09.965819 [info]: Recv data size:152
+2020-07-21 15:12:11.621299 [info]: epoll_wait num:1
+2020-07-21 15:12:11.621483 [info]: removefd:9
+2020-07-21 15:13:10.404431 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:13:10.404674 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:13:10.405144 [info]: Redis tool init success..
+2020-07-21 15:13:10.409467 [info]: MySql connect success..
+2020-07-21 15:13:10.410151 [info]: ThreadPool init success..
+2020-07-21 15:13:10.410371 [info]: Network init success..
+2020-07-21 15:13:15.236163 [info]: epoll accept success..
+2020-07-21 15:13:15.236257 [info]: Add Task success .. queue_head:1
+2020-07-21 15:13:15.236326 [info]: TCPNet Work+1..
+2020-07-21 15:13:21.888819 [info]: epoll_wait num:1
+2020-07-21 15:13:21.891121 [info]: DealData ..
+2020-07-21 15:13:21.891311 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:13:21.891473 [info]: select password from t_userdata where email = '123';
+2020-07-21 15:13:21.892413 [info]: select name from t_userdata where email = '123';
+2020-07-21 15:13:21.893120 [info]: Login success..  login rs name:123
+2020-07-21 15:13:21.893399 [info]: Send data size:92
+2020-07-21 15:13:21.893562 [info]: Recv data size:152
+2020-07-21 15:13:24.153239 [info]: epoll_wait num:1
+2020-07-21 15:13:24.153437 [info]: removefd:9
+2020-07-21 15:13:27.961692 [info]: epoll accept success..
+2020-07-21 15:13:27.962053 [info]: Add Task success .. queue_head:2
+2020-07-21 15:13:27.962155 [info]: TCPNet Work+1..
+2020-07-21 15:13:36.293703 [info]: epoll_wait num:1
+2020-07-21 15:13:36.293794 [info]: epoll_wait num:1
+2020-07-21 15:13:52.666074 [info]: DealData ..
+2020-07-21 15:13:52.666314 [info]: Recv data size:4
+2020-07-21 15:13:52.668958 [info]: epoll_wait num:1
+2020-07-21 15:14:06.148340 [info]: removefd:9
+2020-07-21 15:18:46.365382 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:18:46.365458 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:18:46.365861 [info]: Redis tool init success..
+2020-07-21 15:18:46.368869 [info]: MySql connect success..
+2020-07-21 15:18:46.369541 [info]: ThreadPool init success..
+2020-07-21 15:18:46.369659 [info]: Network init success..
+2020-07-21 15:18:54.694371 [info]: epoll accept success..
+2020-07-21 15:18:54.694823 [info]: Add Task success .. queue_head:1
+2020-07-21 15:18:54.694935 [info]: TCPNet Work+1..
+2020-07-21 15:19:04.459198 [info]: epoll_wait num:1
+2020-07-21 15:19:04.461529 [info]: DealData ..
+2020-07-21 15:19:04.461711 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:19:04.461821 [info]: select password from t_userdata where email = '2222';
+2020-07-21 15:19:04.463145 [info]: login user not exist
+2020-07-21 15:19:04.463490 [info]: Send data size:92
+2020-07-21 15:19:04.463545 [info]: Recv data size:152
+2020-07-21 15:19:12.695114 [info]: epoll_wait num:1
+2020-07-21 15:19:12.697297 [info]: DealData ..
+2020-07-21 15:19:12.697411 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:19:12.697435 [info]: select password from t_userdata where email = '123';
+2020-07-21 15:19:12.697982 [info]: select name from t_userdata where email = '123';
+2020-07-21 15:19:12.698561 [info]: Login success..  login rs name:123
+2020-07-21 15:19:12.698801 [info]: Send data size:92
+2020-07-21 15:19:12.698852 [info]: Recv data size:152
+2020-07-21 15:19:13.956012 [info]: epoll_wait num:1
+2020-07-21 15:19:13.956192 [info]: removefd:9
+2020-07-21 15:19:17.825598 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:19:17.825741 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:19:17.826235 [info]: Redis tool init success..
+2020-07-21 15:19:17.830095 [info]: MySql connect success..
+2020-07-21 15:19:17.830780 [info]: ThreadPool init success..
+2020-07-21 15:19:17.830898 [info]: Network init success..
+2020-07-21 15:19:23.444814 [info]: epoll accept success..
+2020-07-21 15:19:23.444956 [info]: Add Task success .. queue_head:1
+2020-07-21 15:19:23.445217 [info]: TCPNet Work+1..
+2020-07-21 15:19:31.332135 [info]: epoll_wait num:1
+2020-07-21 15:19:31.334299 [info]: DealData ..
+2020-07-21 15:19:31.334473 [info]: clientfd:9 ===> RegisterRq
+2020-07-21 15:19:31.334520 [info]: select email from t_userdata where email = '123';
+2020-07-21 15:19:31.335784 [info]: user to register has already exist..
+2020-07-21 15:19:31.336097 [info]: Send data size:92
+2020-07-21 15:19:31.336150 [info]: Recv data size:152
+2020-07-21 15:19:36.278153 [info]: epoll_wait num:1
+2020-07-21 15:19:36.280222 [info]: DealData ..
+2020-07-21 15:19:36.280377 [info]: clientfd:9 ===> RegisterRq
+2020-07-21 15:19:36.280423 [info]: select email from t_userdata where email = '1234';
+2020-07-21 15:19:36.281953 [info]: user to register has already exist..
+2020-07-21 15:19:36.282319 [info]: Send data size:92
+2020-07-21 15:19:36.282519 [info]: Recv data size:152
+2020-07-21 15:19:49.724126 [info]: epoll_wait num:1
+2020-07-21 15:19:49.726273 [info]: DealData ..
+2020-07-21 15:19:49.726421 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:19:49.726491 [info]: select password from t_userdata where email = '123';
+2020-07-21 15:19:49.727484 [info]: select name from t_userdata where email = '123';
+2020-07-21 15:19:49.728311 [info]: Login success..  login rs name:123
+2020-07-21 15:19:49.728569 [info]: Send data size:92
+2020-07-21 15:19:49.728617 [info]: Recv data size:152
+2020-07-21 15:21:37.798608 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:21:37.798692 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:21:37.799134 [info]: Redis tool init success..
+2020-07-21 15:21:37.802821 [info]: MySql connect success..
+2020-07-21 15:21:37.803429 [info]: ThreadPool init success..
+2020-07-21 15:21:37.803669 [info]: Network init success..
+2020-07-21 15:21:43.941750 [info]: epoll accept success..
+2020-07-21 15:21:43.941900 [info]: Add Task success .. queue_head:1
+2020-07-21 15:21:43.942088 [info]: TCPNet Work+1..
+2020-07-21 15:21:51.085407 [info]: epoll_wait num:1
+2020-07-21 15:21:51.087925 [info]: DealData ..
+2020-07-21 15:21:51.088106 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:21:51.088183 [info]: select password from t_userdata where email = '12';
+2020-07-21 15:21:51.089557 [info]: login user not exist
+2020-07-21 15:21:51.090123 [info]: Send data size:92
+2020-07-21 15:21:51.090185 [info]: Recv data size:152
+2020-07-21 15:21:56.244298 [info]: epoll_wait num:1
+2020-07-21 15:21:56.247323 [info]: DealData ..
+2020-07-21 15:21:56.247532 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:21:56.247585 [info]: select password from t_userdata where email = '123';
+2020-07-21 15:21:56.248466 [info]: select name from t_userdata where email = '123';
+2020-07-21 15:21:56.249424 [info]: Login success..  login rs name:123
+2020-07-21 15:21:56.249851 [info]: Send data size:92
+2020-07-21 15:21:56.249906 [info]: Recv data size:152
+2020-07-21 15:22:00.495730 [info]: epoll_wait num:1
+2020-07-21 15:22:00.495898 [info]: removefd:9
+2020-07-21 15:23:01.399438 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:23:01.399545 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:23:01.400225 [info]: Redis tool init success..
+2020-07-21 15:23:01.402254 [info]: MySql connect success..
+2020-07-21 15:23:01.402542 [info]: ThreadPool init success..
+2020-07-21 15:23:01.402624 [info]: Network init success..
+2020-07-21 15:23:07.344151 [info]: epoll accept success..
+2020-07-21 15:23:07.344238 [info]: Add Task success .. queue_head:1
+2020-07-21 15:23:07.344295 [info]: TCPNet Work+1..
+2020-07-21 15:23:15.750086 [info]: epoll_wait num:1
+2020-07-21 15:23:15.752388 [info]: DealData ..
+2020-07-21 15:23:15.754020 [info]: Recv data size:152
+2020-07-21 15:23:24.983816 [info]: epoll_wait num:1
+2020-07-21 15:23:24.985489 [info]: DealData ..
+2020-07-21 15:23:24.986545 [info]: Recv data size:152
+2020-07-21 15:23:29.235476 [info]: epoll_wait num:1
+2020-07-21 15:23:29.235648 [info]: removefd:9
+2020-07-21 15:24:59.203939 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:24:59.204025 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:24:59.204283 [info]: Redis tool init success..
+2020-07-21 15:24:59.207446 [info]: MySql connect success..
+2020-07-21 15:24:59.207855 [info]: ThreadPool init success..
+2020-07-21 15:24:59.207990 [info]: Network init success..
+2020-07-21 15:25:12.271920 [info]: epoll accept success..
+2020-07-21 15:25:12.272140 [info]: Add Task success .. queue_head:1
+2020-07-21 15:25:12.272281 [info]: TCPNet Work+1..
+2020-07-21 15:25:19.586529 [info]: epoll_wait num:1
+2020-07-21 15:25:19.589067 [info]: Recv data size:152
+2020-07-21 15:26:24.645783 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:26:24.645857 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:26:24.646166 [info]: Redis tool init success..
+2020-07-21 15:26:24.649596 [info]: MySql connect success..
+2020-07-21 15:26:24.650127 [info]: ThreadPool init success..
+2020-07-21 15:26:24.650424 [info]: Network init success..
+2020-07-21 15:28:04.155428 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:28:04.155562 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:28:04.155992 [info]: Redis tool init success..
+2020-07-21 15:28:04.159921 [info]: MySql connect success..
+2020-07-21 15:28:04.160423 [info]: ThreadPool init success..
+2020-07-21 15:28:04.160545 [info]: Network init success..
+2020-07-21 15:28:10.481923 [info]: epoll accept success..
+2020-07-21 15:28:10.482107 [info]: Add Task success .. queue_head:1
+2020-07-21 15:28:10.482227 [info]: TCPNet Work+1..
+2020-07-21 15:28:21.717458 [info]: epoll_wait num:1
+2020-07-21 15:28:21.721710 [info]: Send data size:92
+2020-07-21 15:28:21.721799 [info]: Recv data size:152
+2020-07-21 15:28:26.999828 [info]: epoll_wait num:1
+2020-07-21 15:28:27.004390 [info]: Send data size:92
+2020-07-21 15:28:27.004486 [info]: Recv data size:152
+2020-07-21 15:31:04.074800 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:31:04.074886 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:31:04.075228 [info]: Redis tool init success..
+2020-07-21 15:31:04.079445 [info]: MySql connect success..
+2020-07-21 15:31:04.079921 [info]: ThreadPool init success..
+2020-07-21 15:31:04.080017 [info]: Network init success..
+2020-07-21 15:31:13.714174 [info]: Add Task success .. queue_head:1
+2020-07-21 15:31:37.144583 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:31:37.144809 [info]: select password from t_userdata where email = '1234';
+2020-07-21 15:31:40.816992 [info]: clientfd:9 ===> LoginRq
+2020-07-21 15:31:40.817126 [info]: select password from t_userdata where email = '123124';
+2020-07-21 15:31:40.818045 [info]: login user not exist
+2020-07-21 15:31:43.807422 [info]: removefd:9
+2020-07-21 15:33:06.200921 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:33:06.201010 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:33:06.201474 [info]: Redis tool init success..
+2020-07-21 15:33:06.205536 [info]: MySql connect success..
+2020-07-21 15:33:06.206131 [info]: ThreadPool init success..
+2020-07-21 15:33:06.206340 [info]: Network init success..
+2020-07-21 15:33:11.728701 [info]: Add Task success .. queue_head:1
+2020-07-21 15:34:14.928372 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:34:14.928454 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:34:14.928819 [info]: Redis tool init success..
+2020-07-21 15:34:14.933766 [info]: MySql connect success..
+2020-07-21 15:34:14.934388 [info]: ThreadPool init success..
+2020-07-21 15:34:14.934610 [info]: Network init success..
+2020-07-21 15:34:28.665081 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:34:28.665193 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:34:28.665616 [info]: Redis tool init success..
+2020-07-21 15:34:28.669564 [info]: MySql connect success..
+2020-07-21 15:34:28.670117 [info]: ThreadPool init success..
+2020-07-21 15:34:28.670305 [info]: Network init success..
+2020-07-21 15:36:55.542212 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:36:55.542302 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:36:55.542714 [info]: Redis tool init success..
+2020-07-21 15:36:55.546351 [info]: MySql connect success..
+2020-07-21 15:36:55.546836 [info]: ThreadPool init success..
+2020-07-21 15:36:55.546989 [info]: Network init success..
+2020-07-21 15:37:01.224111 [info]: Add Task success .. queue_head:1
+2020-07-21 15:37:10.147846 [info]: removefd:9
+2020-07-21 15:37:14.827975 [info]: Add Task success .. queue_head:2
+2020-07-21 15:37:36.084418 [info]: removefd:9
+2020-07-21 15:37:40.304911 [info]: Add Task success .. queue_head:3
+2020-07-21 15:37:50.054772 [info]: removefd:9
+2020-07-21 15:38:03.949493 [info]: Add Task success .. queue_head:4
+2020-07-21 15:39:33.922178 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:39:33.922259 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:39:33.922630 [info]: Redis tool init success..
+2020-07-21 15:39:33.925906 [info]: MySql connect success..
+2020-07-21 15:39:33.926240 [info]: ThreadPool init success..
+2020-07-21 15:39:33.926360 [info]: Network init success..
+2020-07-21 15:40:13.986766 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:40:13.986850 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:40:13.987280 [info]: Redis tool init success..
+2020-07-21 15:40:13.990788 [info]: MySql connect success..
+2020-07-21 15:40:13.991630 [info]: ThreadPool init success..
+2020-07-21 15:40:13.991839 [info]: Network init success..
+2020-07-21 15:41:10.966739 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-21 15:41:10.966809 [info]: Redis Init:ip = 127.0.0.1
+2020-07-21 15:41:10.967098 [info]: Redis tool init success..
+2020-07-21 15:41:10.972086 [info]: MySql connect success..
+2020-07-21 15:41:10.972841 [info]: ThreadPool init success..
+2020-07-21 15:41:10.972978 [info]: Network init success..
+2020-07-21 15:42:11.080507 [info]: removefd:9
+2020-07-21 15:42:46.747809 [info]: removefd:9
+2020-07-21 15:42:46.747871 [info]: removefd:9
