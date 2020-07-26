@@ -54,10 +54,10 @@ bool TCPNet::InitNetWork()
 
 //	m_threadpool->AddTask(Epoll_Jobs,(void*)this);
 	epoll_event events[MAX_EVENTS];
-	epollfds = epoll_create(5);
+	epollfds = epoll_create(_DEF_EPOLLSIZE);
 
 	addfd(epollfds,s_socket,1);
-	epollfd = epoll_create(5);
+	epollfd = epoll_create(_DEF_EPOLLSIZE);
 	int num;
 
 	cout << "Network init success.." << endl;

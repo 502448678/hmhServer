@@ -13,7 +13,8 @@ int main()
 	Log::get_instance()->init("../log/mylog.log", 300, 20000);
 
 	TCPKernel tk;
-	if(tk.Open()==true)
+	tk.Open();
+/*	if(tk.Open()==true)
 	{
 		while(1)
 		{
@@ -23,6 +24,8 @@ int main()
 		}
 
 	}
+*/
+	Log::get_instance()->flush();
 	tk.Close();
 	return 0;
 }
