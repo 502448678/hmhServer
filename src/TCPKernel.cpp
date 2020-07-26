@@ -230,6 +230,15 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 			LOG_INFO("%s%s\n","Login success..  login rs name:",username_rs);
 			strcpy(rs.m_username ,(const char*)username_rs);
 
+			char userid_sql[_DEF_SQLLEN] = {0};
+			sprintf(userid_sql,"select id from t_userdata where email = '%s';",rq->m_useremail);
+			cout << userid_sql;
+			LOG_INFO("%s\n",userid_sql);
+
+			m_sql.SelectMySql(username_sql,1,lstStr);
+			char* userid_rs = (char*)lstStr.front().c_str();
+			LOG_INFO("%s%s\n","login rs id:",username_rs);
+			rs.m_UserId = atoi(userid_rs);
 			// write into redis  用戶id --> 用戶socket ， 用戶名字   id=1 --> 7 , zhangsan  list
 			// 超時 5s  心跳 3秒一次發送  超時這個key自動消失
 /*			char sztmp[100];
