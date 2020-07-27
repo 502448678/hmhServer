@@ -162,3 +162,46 @@
 2020-07-26 14:10:57.845778 [info]: MySql connect success..
 2020-07-26 14:10:57.846900 [info]: ThreadPool init success..
 2020-07-26 14:10:57.847092 [info]: Network init success..
+2020-07-26 15:45:11.841838 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 15:45:11.842113 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 15:45:11.842610 [info]: Redis tool init success..
+2020-07-26 15:45:11.849099 [info]: MySql connect success..
+2020-07-26 15:45:11.850769 [info]: ThreadPool init success..
+2020-07-26 15:45:11.850994 [info]: Network init success..
+2020-07-26 16:35:56.986603 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 16:35:56.986640 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 16:35:56.987246 [info]: Redis tool init success..
+2020-07-26 16:35:56.991787 [info]: MySql connect success..
+2020-07-26 16:35:56.992672 [info]: ThreadPool init success..
+2020-07-26 16:35:56.992861 [info]: Network init success..
+2020-07-26 16:36:23.052483 [info]: clientfd:9 ===> LoginRq
+2020-07-26 16:36:23.052626 [info]: select password from t_userdata where email = '123';
+2020-07-26 16:36:23.057924 [info]: select name from t_userdata where email = '123';
+2020-07-26 16:36:23.058965 [info]: Login success..  login rs name:123
+2020-07-26 16:36:23.059007 [info]: select id from t_userdata where email = '123';
+2020-07-26 16:36:23.059657 [info]: login rs id:123
+2020-07-26 16:55:05.711381 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 16:55:05.711422 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 16:55:05.711771 [info]: Redis tool init success..
+2020-07-26 16:55:05.715865 [info]: MySql connect success..
+2020-07-26 16:55:05.716781 [info]: ThreadPool init success..
+2020-07-26 16:55:05.716946 [erro]: Network init error..
+2020-07-26 16:55:39.140417 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 16:55:39.140681 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 16:55:39.141094 [info]: Redis tool init success..
+2020-07-26 16:55:39.144690 [info]: MySql connect success..
+2020-07-26 16:55:39.146192 [info]: ThreadPool init success..
+2020-07-26 16:55:39.146291 [erro]: Network init error..
+2020-07-26 16:57:20.887731 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-26 16:57:20.887775 [info]: Redis Init:ip = 127.0.0.1
+2020-07-26 16:57:20.888205 [info]: Redis tool init success..
+2020-07-26 16:57:20.891610 [info]: MySql connect success..
+2020-07-26 16:57:20.892697 [info]: ThreadPool init success..
+2020-07-26 16:57:20.892835 [info]: Network init success..
+2020-07-26 16:57:40.514901 [info]: clientfd:9 ===> LoginRq
+2020-07-26 16:57:40.515076 [info]: select password from t_userdata where email = '123';
+2020-07-26 16:57:40.517301 [info]: select name from t_userdata where email = '123';
+2020-07-26 16:57:40.518526 [info]: Login success..  login rs name:123
+2020-07-26 16:57:40.518784 [info]: select id from t_userdata where email = '123';
+2020-07-26 16:57:40.519868 [info]: login rs id:123
+2020-07-26 16:58:54.759729 [info]: removefd:9

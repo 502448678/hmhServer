@@ -1,0 +1,8 @@
+2020-07-27 08:48:26.032014 [info]: clientfd:9 ===> LoginRq
+2020-07-27 08:48:26.058505 [info]: select password from t_userdata where email = '1234';
+2020-07-27 08:48:29.440712 [info]: clientfd:9 ===> LoginRq
+2020-07-27 08:48:29.440817 [info]: select password from t_userdata where email = '123';
+2020-07-27 08:48:29.442110 [info]: select name from t_userdata where email = '123';
+2020-07-27 08:48:29.442875 [info]: Login success..  login rs name:123
+2020-07-27 08:48:29.442915 [info]: select id from t_userdata where email = '123';
+2020-07-27 08:48:29.443783 [info]: login rs id:123

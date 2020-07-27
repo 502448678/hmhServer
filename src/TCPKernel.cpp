@@ -286,4 +286,119 @@ void HeartRq(int clientfd ,char* szbuf,int nlen)
 
 
 */
+void TCPKernel::UploadRq(int clientfd,char* szbuf)
+{
+	cout <<"clientfd:"<<clientfd<<" UploadRq.."<<endl;
+	STRU_UPLOAD_RQ *rq = (STRU_UPLOAD_RQ*)szbuf;
+	FileInfo *info =(FileInfo*)malloc(sizeof(FileInfo));
+
+	info->m_nFileID = rq-<m_FileId;
+	info->m_nPos = 0;
+	info-<m_nFileSize = rq->m_nFileSize;
+	memcpy(info->m_szFileName,rq->m_szFileName,_MAX_PATH);
+	memcpy(info->m_szFileType,rq->m_szFileType,_MAX_PATH);
+	info->m_nUserId = rq->m_UserId;
+	memcpy(info->m_Hobby,rq->m_szHobby,_DEF_HOBBY_COUNT);
+
+	//获取用户名字
+	char szsql(_DEF_SQLLEN);
+	bzero(szsql,sizeof(szsql));
+	list<string> lstStr;
+	//判断用户是否存在
+	sprintf(szsql,"select name from t_userdata where id = %d;",rq->m_UserId);
+	cout << szsql << endl;
+	if(SelectMysql(szsql,1,lstStr)==false)
+	{
+		err_str("SelectMySql Falied:",-1);
+		free(info);
+		lstStr.clear();
+		return;
+	}
+	else
+	{
+		char* szUsername = (char*)lstStr.pop_back();
+		sprintf(info->m_szUserName,"%s",szUserName);
+		sprintf(info->m_szFilePath,"%sflv/%s/%s",RootPath,szUserName,rq->m_szFileName);
+	}
+	info->m_VideoID = 0;
+	info->pFile = fopen(info->szFilePath,"w");
+	if(info->pFile)
+		listStr.push_back((void*)info);
+	else
+		free(info);
+	lstStr(info);
+
+}
+
+
+char* TCPKernel::GetPicNameOfVideo(char* videoName)
+{
+	char* picName = (char*)malloc(_MAX_PATH);
+	memeset(picName,0,_MAX_PATH);
+	int i;
+	int nlen = strlen(videoName);
+	for(i=nlen-1;i>=0;i--)
+	{
+		if(videoName[i]=='.')
+			break;
+	}
+	memcpy(picName,videoName,i+1);
+	strcat(picName,"jpg");
+	return picName;
+}
+
+void UploadFileBlockRq(int clientfd,char* szbuf)
+{
+	STRU_UPLOAD_FILEBLOCK_RQ *rq = (STRU_UPLOAD_FILEBLOCK_RQ*)szbuf;
+	FileInfo*info = 0;
+	int64_t nlen = 0;
+
+	Myqueue* tmp = FileQueue->pHead;
+	while(tmp)
+	{
+		info = (FileInfo*) tmp->nValue;
+		if(info->m_nUserId == rq->m_nUserId && info->m_nFileID == rq->m_nFileId)
+			break;
+		tmp = tmp->pNext;
+	}
+	if(info)
+	{
+		//写入
+		nLen = fwrite(rq->m_szFileContent,1,rq->m_nBlocklen,info->pFile);
+		info->m_nPos += nlen;
+		//文件结束关闭
+		if(rq->m_nBlockLen < _MAXCONTENT_LEN || info->m_nPos >= info->m_nFileSize)
+		{
+			//关闭文件，删除节点
+			fclose(info->pFile);
+			if(strcmp(info->m_szFileType,"jpg")!=0
+			{
+				STRU_UPLOAD_RS rs;
+				rs.m_nType = _DEF_PROTOCOL_UPLOAD_RS;
+				rs.m_nResult = 1;
+				//信息写到数据库中
+				char szsql[_DEF_SQLLEN];
+				bzero(szsql,sizeof(szsql));
+
+				char* picName = GetPicNameOfVideo(info->m_szFileName);
+				char* picPath = GetPicNameOfVideo(info->m_szFilePath);
+				char rtmp[MAX_PATH] = {0};
+				sprintf(rtmp,"//%s/%s",info->m_UserName,info->m_szFileName);
+				sprintf(szsql,"insert into t_videldata() values();",%s);
+				cout <<szsql<<endl;
+				if(UpdataMysql(szsql) == FALSE)
+				{
+					err_str("Update MySql Failed.."-1);
+				}
+				free(picNmae);
+				free(picPath);
+				senData(clientfd,(char*)&rs,sizeof(rs));
+			}
+			//如果是video 返回一个确认
+			q_DeleteNode(fileQueue,info);
+			free(info);
+			info = NULL;
+		}
+	}
+}
 

@@ -19,7 +19,7 @@
 #include <cstdlib>
 #include <unistd.h>
 #include "RedisTools.h"
-
+#include "Queue.h"
 using namespace std;
 
 class TCPKernel;
@@ -41,8 +41,19 @@ public:
 	void Close();
 	void DealData(int sock,char* szbuf);
 public:
-	void RegisterRq(int sock,char* szbuf);
-	void LoginRq(int sock,char* szbuf);
+//注册
+	void RegisterRq(int sock,char* szbuf);   
+//登录
+	void LoginRq(int sock,char* szbuf);      
+//上传
+	void UploadRq(int sock,char* szbuf);
+	void UpladFileBlockRq(int sock,char* szbuf);
+	char* GetPicNameOfVideo(char* videoName);
+//下载
+//	void DownloadRq(int sock,char* szbuf);
+//	void GetDownladList(Queue* plist,int userId);
+
+//	void DownloadFileNlockRs(int sock,char* szbuf);
 
 public:
 	INet* m_pTCPNet;
