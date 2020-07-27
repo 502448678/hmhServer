@@ -10,7 +10,8 @@ int main()
 	pthread_mutex_init(&alock,NULL);
 	pthread_mutex_init(&rlock,NULL);
 
-	Log::get_instance()->init("../log/mylog.log", 300, 20000);
+	char LogPath[64] = "../log/mylog.log";
+	Log::get_instance()->init(LogPath, 300, 20000);
 
 	TCPKernel tk;
 	tk.Open();

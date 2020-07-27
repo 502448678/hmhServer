@@ -45,6 +45,24 @@ bool MySql::SelectMySql(char* szSql,int nColumn,list<string>& lstStr)
 	mysql_free_result(results);
 	return true;
 }
+bool MySql::SelectMySql(char* szSql,int nColumn,Queue* pQueue)
+{
+	results = NULL;
+	if(mysql_query(sock,szSql))
+		return false;
+	results = mysql_store_result(sock);
+	if(NULL == results)return FALSE;
+	while((record = mysql_fetch_row(results)))
+	{
+
+		for(int i=0;i<nColumn;i++)
+		{
+			q_Push(pQueue,(void*)record[i]);
+		}
+	}
+	return true;
+}
+
 
 bool MySql::UpdateMySql(char* szSql)
 {

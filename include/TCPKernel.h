@@ -47,14 +47,16 @@ public:
 	void LoginRq(int sock,char* szbuf);      
 //上传
 	void UploadRq(int sock,char* szbuf);
-	void UpladFileBlockRq(int sock,char* szbuf);
+	void UploadFileBlockRq(int sock,char* szbuf);
 	char* GetPicNameOfVideo(char* videoName);
 //下载
-//	void DownloadRq(int sock,char* szbuf);
-//	void GetDownladList(Queue* plist,int userId);
+	void DownloadRq(int sock,char* szbuf);
+	void GetDownloadList(Queue* plist,int userId);
 
-//	void DownloadFileNlockRs(int sock,char* szbuf);
+	void DownloadFileBlockRs(int sock,char* szbuf);
 
+//点赞
+	void PressLikeRq(int clientfd,char*szbuf);
 public:
 	INet* m_pTCPNet;
 	ThreadPool* m_threadpool;

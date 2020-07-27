@@ -12,7 +12,7 @@ RedisTool * g_Redis = 0;
 FILE *m_pFile;
 int m_nFileSize;
 int m_nPos;
-
+#define RootPath   "/home/colin/Video/"
 TCPKernel::TCPKernel()
 {
 	m_pTCPNet = new TCPNet(this);
@@ -30,8 +30,13 @@ TCPKernel::~TCPKernel()
 //=== 协议映射表  ===================================================//
 
 	BEGIN_PROTOCOL_MAP
-	PM(_DEF_PROTOCOL_LOGIN_RQ,&TCPKernel::LoginRq)
 	PM(_DEF_PROTOCOL_REGISTER_RQ,&TCPKernel::RegisterRq)
+	PM(_DEF_PROTOCOL_LOGIN_RQ,&TCPKernel::LoginRq)	
+	PM(_DEF_PROTOCOL_UPLOAD_RQ,&TCPKernel::UploadRq)
+	PM(_DEF_PROTOCOL_UPLOAD_FILEBLOCK_RQ,&TCPKernel::UploadFileBlockRq)
+	PM(_DEF_PROTOCOL_DOWNLOAD_RQ,&TCPKernel::DownloadRq)
+	PM(_DEF_PROTOCOL_DOWNLOAD_FILEBLOCK_RS,&TCPKernel::DownloadFileBlockRs)
+	PM(_DEF_PROTOCOL_PRESSLIKE_RQ, &TCPKernel::PressLikeRq)
 	END_PROTOCOL_MAP
 
 //===================================================================//
@@ -42,7 +47,7 @@ bool TCPKernel::Open()
 	g_Redis = new RedisTool;
 
     	m_pFile = NULL;
-		m_nFileSize = 0;
+	m_nFileSize = 0;
     	m_nPos = 0;
 //    int j= 1234;
 //    for( int i = 0 ; i < 30 ; ++i)
@@ -289,44 +294,46 @@ void HeartRq(int clientfd ,char* szbuf,int nlen)
 void TCPKernel::UploadRq(int clientfd,char* szbuf)
 {
 	cout <<"clientfd:"<<clientfd<<" UploadRq.."<<endl;
-	STRU_UPLOAD_RQ *rq = (STRU_UPLOAD_RQ*)szbuf;
-	FileInfo *info =(FileInfo*)malloc(sizeof(FileInfo));
+	
+	STRU_UPLOAD_RQ *rq = (STRU_UPLOAD_RQ *)szbuf;
+	FileInfo *info = (FileInfo*)malloc(sizeof(FileInfo));
 
-	info->m_nFileID = rq-<m_FileId;
+	info->m_nFileID = rq->m_nFileId ;
 	info->m_nPos = 0;
-	info-<m_nFileSize = rq->m_nFileSize;
-	memcpy(info->m_szFileName,rq->m_szFileName,_MAX_PATH);
-	memcpy(info->m_szFileType,rq->m_szFileType,_MAX_PATH);
+	info->m_nFileSize = rq->m_nFileSize;
+	memcpy( info->m_szFileName , rq->m_szFileName , _MAX_PATH);
+	memcpy( info->m_szFileType , rq->m_szFileType , _MAX_PATH);
 	info->m_nUserId = rq->m_UserId;
-	memcpy(info->m_Hobby,rq->m_szHobby,_DEF_HOBBY_COUNT);
-
+	memcpy(  info->m_Hobby , rq->m_szHobby , _DEF_HOBBY_COUNT);
 	//获取用户名字
-	char szsql(_DEF_SQLLEN);
+	char szsql[_DEF_SQLLEN];
 	bzero(szsql,sizeof(szsql));
-	list<string> lstStr;
-	//判断用户是否存在
+	Queue* pQueue = NULL;
+	q_Init(&pQueue);
+	//判断角色是否存在
 	sprintf(szsql,"select name from t_userdata where id = %d;",rq->m_UserId);
 	cout << szsql << endl;
-	if(SelectMysql(szsql,1,lstStr)==false)
+	if(m_sql.SelectMySql(szsql,1,pQueue) == FALSE)
 	{
 		err_str("SelectMySql Falied:",-1);
-		free(info);
-		lstStr.clear();
+		free( info );
+		q_Destroy(&pQueue);
 		return;
 	}
-	else
-	{
-		char* szUsername = (char*)lstStr.pop_back();
-		sprintf(info->m_szUserName,"%s",szUserName);
-		sprintf(info->m_szFilePath,"%sflv/%s/%s",RootPath,szUserName,rq->m_szFileName);
+	else{
+		char * szUserName = (char*)q_Pop(pQueue);
+		sprintf( info->m_UserName ,"%s",szUserName);
+		sprintf( info->m_szFilePath ,"%sflv/%s/%s",RootPath,szUserName,rq->m_szFileName);
 	}
 	info->m_VideoID = 0;
-	info->pFile = fopen(info->szFilePath,"w");
-	if(info->pFile)
-		listStr.push_back((void*)info);
-	else
-		free(info);
-	lstStr(info);
+	info->pFile = fopen(info->m_szFilePath , "w");
+	if( info->pFile )
+	{
+	q_Push( FileQueue , (void*)info);
+	}else{
+	free( info );
+	}
+	q_Destroy(&pQueue);
 
 }
 
@@ -334,7 +341,7 @@ void TCPKernel::UploadRq(int clientfd,char* szbuf)
 char* TCPKernel::GetPicNameOfVideo(char* videoName)
 {
 	char* picName = (char*)malloc(_MAX_PATH);
-	memeset(picName,0,_MAX_PATH);
+	memset(picName,0,_MAX_PATH);
 	int i;
 	int nlen = strlen(videoName);
 	for(i=nlen-1;i>=0;i--)
@@ -347,7 +354,7 @@ char* TCPKernel::GetPicNameOfVideo(char* videoName)
 	return picName;
 }
 
-void UploadFileBlockRq(int clientfd,char* szbuf)
+void TCPKernel::UploadFileBlockRq(int clientfd,char* szbuf)
 {
 	STRU_UPLOAD_FILEBLOCK_RQ *rq = (STRU_UPLOAD_FILEBLOCK_RQ*)szbuf;
 	FileInfo*info = 0;
@@ -364,41 +371,375 @@ void UploadFileBlockRq(int clientfd,char* szbuf)
 	if(info)
 	{
 		//写入
-		nLen = fwrite(rq->m_szFileContent,1,rq->m_nBlocklen,info->pFile);
+		nlen = fwrite(rq->m_szFileContent,1,rq->m_nBlockLen,info->pFile);
 		info->m_nPos += nlen;
 		//文件结束关闭
-		if(rq->m_nBlockLen < _MAXCONTENT_LEN || info->m_nPos >= info->m_nFileSize)
+		if(rq->m_nBlockLen < _MAX_CONTENT_LEN || info->m_nPos >= info->m_nFileSize)
 		{
 			//关闭文件，删除节点
 			fclose(info->pFile);
-			if(strcmp(info->m_szFileType,"jpg")!=0
+			if(strcmp(info->m_szFileType,"jpg")!=0)
 			{
 				STRU_UPLOAD_RS rs;
 				rs.m_nType = _DEF_PROTOCOL_UPLOAD_RS;
 				rs.m_nResult = 1;
 				//信息写到数据库中
-				char szsql[_DEF_SQLLEN];
+				char szsql[1024];
 				bzero(szsql,sizeof(szsql));
 
 				char* picName = GetPicNameOfVideo(info->m_szFileName);
 				char* picPath = GetPicNameOfVideo(info->m_szFilePath);
-				char rtmp[MAX_PATH] = {0};
+				char rtmp[_RTMP_SIZE] = {0};
 				sprintf(rtmp,"//%s/%s",info->m_UserName,info->m_szFileName);
-				sprintf(szsql,"insert into t_videldata() values();",%s);
+				sprintf(szsql,"insert into t_videoinfo (userId,videoName,picName,videoPath,picPath,rtmp,food,funny,ennegy,dance,music,video,outside,edu,hotdegree) values(%d,'%s','%s','%s','%s','%s',%d,%d,%d,%d,%d,%d,%d,%d,0);"
+                    ,info->m_nUserId , info->m_szFileName , picName ,info->m_szFilePath , picPath , rtmp , info->m_Hobby[0],info->m_Hobby[1],info->m_Hobby[2],info->m_Hobby[3],info->m_Hobby[4],info->m_Hobby[5],info->m_Hobby[6],info->m_Hobby[7]);
 				cout <<szsql<<endl;
-				if(UpdataMysql(szsql) == FALSE)
+				if(m_sql.UpdateMySql(szsql) == FALSE)
 				{
-					err_str("Update MySql Failed.."-1);
+					err_str("Update MySql Failed..",-1);
 				}
-				free(picNmae);
+				free(picName);
 				free(picPath);
-				senData(clientfd,(char*)&rs,sizeof(rs));
+				m_pTCPNet->SendData(clientfd,(char*)&rs,sizeof(rs));
 			}
 			//如果是video 返回一个确认
-			q_DeleteNode(fileQueue,info);
+			q_DeleteNode(FileQueue,(void*)info);
 			free(info);
 			info = NULL;
 		}
 	}
 }
+
+void TCPKernel::DownloadRq(int clientfd,char*szbuf)
+{
+    cout<<"clientfd:"<<clientfd<<" DownloadRq"<<endl;
+    STRU_DOWNLOAD_RQ *rq = (STRU_DOWNLOAD_RQ*)szbuf;
+
+    cout <<"m_nUserId:"<<rq->m_nUserId<<endl;
+    Queue* pList = NULL;
+	q_Init(&pList);
+
+    GetDownloadList(  pList,  rq->m_nUserId);
+
+    while(q_GetNum(pList) != 0)
+    {
+        FileInfo * pInfo = (FileInfo*)q_Pop(pList);
+        STRU_DOWNLOAD_RS rs;
+        rs.m_nFileId = pInfo->m_nFileID;
+        rs.m_nFileSize = pInfo->m_nFileSize;
+        rs.m_nType = _DEF_PROTOCOL_DOWNLOAD_RS;
+        rs.m_nVideoId = pInfo->m_VideoID;
+        strcpy( rs.m_rtmp ,  pInfo->m_szRtmp);
+        strcpy( rs.m_szFileName , pInfo->m_szFileName);
+        m_pTCPNet->SendData(clientfd,(char*)&rs,sizeof(rs));
+
+        pInfo->pFile = fopen(pInfo->m_szFilePath , "r");
+        cout<<pInfo->m_szFilePath<<endl;
+        if( pInfo->pFile )
+        {
+            while(1)
+            {
+                //文件内容 内容长度 文件Id,文件位置--传输请求
+                STRU_DOWNLOAD_FILEBLOCK_RQ blockrq;
+                blockrq.m_nType = _DEF_PROTOCOL_DOWNLOAD_FILEBLOCK_RQ;
+                int64_t nRelReadNum = (int64_t)fread(blockrq.m_szFileContent,1,_MAX_CONTENT_LEN,pInfo->pFile);
+
+                blockrq.m_nBlockLen = nRelReadNum;
+                blockrq.m_nFileId = pInfo->m_nFileID;
+                blockrq.m_nUserId = pInfo->m_nUserId;
+
+                cout<<"nRealReadNum:"<<blockrq.m_nBlockLen<<endl;
+                m_pTCPNet->SendData(clientfd,(char*)&blockrq,sizeof(blockrq));
+
+                pInfo->m_nPos += nRelReadNum;
+
+                if(pInfo->m_nPos == pInfo->m_nFileSize)
+                {
+                    fclose(pInfo->pFile);
+                    free( pInfo );
+                    break;
+                }
+            }
+        }
+    }
+    q_Destroy(&pList);
+
+}
+
+void TCPKernel::GetDownloadList( Queue*  plist,  int userId)
+{
+  //  根据id获取喜好， 推荐生成列表播放  /id -->
+
+    char szsql[_DEF_SQLLEN];
+	bzero(szsql,sizeof(szsql));
+	Queue* pQueue = NULL;
+	q_Init(&pQueue);
+	char * szbuf = 0;
+	int nCount = 0 ;
+
+	//判断角色是否存在
+	sprintf(szsql,"select count(videoId) from t_videoinfo where t_VideoInfo.videoId not in ( select t_UserRecv.videoId from t_UserRecv where t_UserRecv.UserId = %d );",userId);
+	cout << szsql <<endl;
+	if(m_sql.SelectMySql(szsql,1,pQueue) == FALSE)
+	{
+		err_str("SelectMySql Falied:",-1);
+		q_Destroy(&pQueue);
+		return;
+	}
+    else{
+		szbuf = (char*)q_Pop(pQueue);
+        nCount = atoi(szbuf);
+    }
+    if( nCount < 10 )
+    {
+        bzero(szsql,sizeof(szsql));
+        sprintf(szsql,"delete from t_UserRecv  where  userId = %d ;",userId);
+        cout << szsql <<endl;
+        if(m_sql.UpdateMySql(szsql) == FALSE)
+        {
+            err_str("Update MySql Failed...",-1);
+        }
+    }
+    bzero(szsql,sizeof(szsql));
+    sprintf(szsql,"select videoId , picName , picPath , rtmp from t_videoinfo where t_VideoInfo.videoId not in ( select t_UserRecv.videoId from t_UserRecv where t_UserRecv.userId = %d );",userId);
+    cout << szsql <<endl;
+	if(m_sql.SelectMySql(szsql,4,pQueue) == FALSE)
+	{
+		err_str("SelectMySql Falied:",-1);
+		q_Destroy(&pQueue);
+		return;
+	}
+    else{
+         //热度推荐
+        for( int i = 1 ; i <= 10 ; i++ )
+        {
+            FileInfo * pInfo = (FileInfo *)malloc(sizeof(FileInfo )) ;
+            pInfo->m_nPos = 0;
+            pInfo->m_nFileID = i;
+
+            pInfo->m_nUserId = userId;
+            szbuf = (char*)q_Pop(pQueue);
+            nCount = atoi(szbuf);
+            pInfo->m_VideoID = nCount;
+            szbuf = (char*)q_Pop(pQueue);
+            strcpy( pInfo->m_szFileName ,szbuf);
+            szbuf = (char*)q_Pop(pQueue);
+            strcpy( pInfo->m_szFilePath, szbuf);
+            szbuf = (char*)q_Pop(pQueue);
+            strcpy( pInfo->m_szRtmp , szbuf);
+            FILE* pFile = fopen(pInfo->m_szFilePath , "r");
+            fseek(pFile,0 , SEEK_END);
+            pInfo->m_nFileSize =  ftell(pFile);
+            fseek(pFile , 0 , SEEK_SET);
+            fclose(pFile);
+            pInfo->pFile = 0;
+            q_Push(plist,(void*)pInfo);
+            bzero(szsql,sizeof(szsql));
+            sprintf(szsql,"insert into t_userrecv values(%d ,%d);",userId,pInfo->m_VideoID );
+            cout << szsql <<endl;
+            if(m_sql.UpdateMySql(szsql) == FALSE)
+            {
+                err_str("Update MySql Failed...",-1);
+            }
+        }
+    }
+
+
+
+
+//
+//    pInfo = (FileInfo *)malloc(sizeof(FileInfo )) ;
+//    pInfo->m_nPos = 0;
+//    pInfo->m_nFileID = 2;
+//    pInfo->m_nFileSize = 13724;
+//    pInfo->m_nUserId = userId;
+//    strcpy( pInfo->m_szFileName ,"2.jpg");
+//    strcpy( pInfo->m_szFilePath, "/home/colin/Video/img/2.jpg");
+//    strcpy( pInfo->m_szRtmp , "2.flv");
+//    pInfo->pFile = 0;
+//    q_Push(plist,(void*)pInfo);
+//
+//    pInfo = (FileInfo *)malloc(sizeof(FileInfo )) ;
+//    pInfo->m_nPos = 0;
+//    pInfo->m_nFileID = 3;
+//    pInfo->m_nFileSize = 27430;
+//    pInfo->m_nUserId = userId;
+//    strcpy( pInfo->m_szFileName ,"3.jpg");
+//    strcpy( pInfo->m_szFilePath, "/home/colin/Video/img/3.jpg");
+//    strcpy( pInfo->m_szRtmp , "3.flv");
+//    pInfo->pFile = 0;
+//    q_Push(plist,(void*)pInfo);
+
+
+}
+
+void TCPKernel::DownloadFileBlockRs(int clientfd,char*szbuf)
+{
+    STRU_DOWNLOAD_FILEBLOCK_RS *psufr = (STRU_DOWNLOAD_FILEBLOCK_RS *)szbuf;
+
+    Myqueue * tmp = FileQueue->pHead;
+    FileInfo * pInfo = 0;
+    while(tmp)
+    {
+        if( ((FileInfo*)tmp ->nValue)->m_nFileID == psufr->m_nFileId
+        && ((FileInfo*)tmp ->nValue)->m_nUserId ==  psufr->m_nUserId )
+        {
+            pInfo = (FileInfo*)tmp ->nValue;
+            break;
+        }
+        tmp = tmp->pNext;
+    }
+    if( !pInfo ) return;
+
+	STRU_DOWNLOAD_FILEBLOCK_RQ sufr;
+	sufr.m_nType = _DEF_PROTOCOL_DOWNLOAD_FILEBLOCK_RQ;
+	sufr.m_nFileId = pInfo->m_nFileID;
+	sufr.m_nUserId = pInfo->m_nUserId;
+	//如果文件块客户端接收失败，再次发送
+	if(psufr->m_nResult == _downloadfileblock_fail)
+	{
+		//移动文件指针pInfo->m_nDownLoadSize
+		fseeko64(pInfo->pFile,pInfo->m_nPos,SEEK_SET);
+		int64_t nRelReadNum = (int64_t)fread(sufr.m_szFileContent,1,_MAX_CONTENT_LEN,pInfo->pFile);
+		sufr.m_nBlockLen = nRelReadNum;
+		//读文件内容并发送
+		m_pTCPNet->SendData(clientfd,(char*)&sufr,sizeof(sufr));
+		return;
+	}
+	pInfo->m_nPos += psufr->m_nBlockLen;
+
+	if(pInfo->m_nPos == pInfo->m_nFileSize)
+	{
+		fclose(pInfo->pFile);
+
+		Myqueue * tmp = FileQueue->pHead;
+		if( ((FileInfo*)tmp->nValue) == pInfo )
+		{
+            tmp =(Myqueue*) q_Pop( FileQueue );
+		}else{
+            while(tmp)
+            {
+                if(tmp->pNext && ((FileInfo*)tmp->pNext->nValue)  == pInfo )
+                {
+                    tmp = tmp->pNext->pNext;
+                    break;
+                }
+                tmp = tmp->pNext;
+            }
+		}
+        free( pInfo );
+		return;
+	}
+	else
+	{
+		 	int64_t nRelReadNum = (int64_t)fread(sufr.m_szFileContent,1,_MAX_CONTENT_LEN,pInfo->pFile);
+			sufr.m_nBlockLen = nRelReadNum;
+			printf("m_nBlockLen:%d\n",sufr.m_nBlockLen);
+	}
+	m_pTCPNet->SendData(clientfd,(char*)&sufr,sizeof(sufr));
+
+}
+
+void TCPKernel::PressLikeRq(int clientfd,char*szbuf)
+{
+    STRU_PRESSLIKE_RQ * rq = (STRU_PRESSLIKE_RQ *)szbuf;
+
+    char szsql[_DEF_SQLLEN];
+	bzero(szsql,sizeof(szsql));
+
+	sprintf(szsql,"insert into t_useraction values( %d,%d);",rq->m_nUserId , rq->m_nVideoId);
+    cout << szsql <<endl;
+    if(m_sql.UpdateMySql(szsql) == FALSE)
+    {
+        err_str("Update MySql Failed...",-1);
+        return;
+    }
+    //更新视频热度
+    bzero(szsql,sizeof(szsql));
+    sprintf(szsql,"update t_videoinfo set hotdegree = hotdegree +1 where videoId =%d;" , rq->m_nVideoId);
+    cout << szsql <<endl;
+    if(m_sql.UpdateMySql(szsql) == FALSE)
+    {
+        err_str("Update MySql Failed...",-1);
+        return;
+    }
+    //取出影片类型 取出用户喜好， 给用户喜好加分
+    bzero(szsql,sizeof(szsql));
+    Queue* pQueue = NULL;
+	q_Init(&pQueue);
+	char * szChar = 0;
+
+	int food , funny ,ennegy ,dance , music,  video,  outside , edu ;
+	int food1 , funny1 ,ennegy1 ,dance1 , music1,  video1,  outside1 , edu1;
+
+	sprintf(szsql,"select food , funny ,ennegy ,dance , music,  video,  outside , edu from t_videoinfo where videoId = %d;", rq->m_nVideoId);
+    cout << szsql <<endl;
+    if(m_sql.SelectMySql(szsql,8,pQueue) == FALSE)
+    {
+        err_str("SelectMysql Failed...",-1);
+        q_Destroy(&pQueue);
+        return;
+    }else{
+        szChar = (char*)q_Pop(pQueue);
+        food = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        funny = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        ennegy = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        dance = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        music = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        video = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        outside = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        edu = atoi(szChar);
+    }
+    bzero(szsql,sizeof(szsql));
+    sprintf(szsql,"select food , funny ,ennegy ,dance , music,  video,  outside , edu from t_userdata where id = %d;", rq->m_nUserId);
+    cout <<szsql<<endl;
+    if(m_sql.SelectMySql(szsql,8,pQueue) == FALSE)
+    {
+        err_str("SelectMysql Failed...",-1);
+        q_Destroy(&pQueue);
+        return;
+    }else{
+        szChar = (char*)q_Pop(pQueue);
+        food1 = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        funny1 = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        ennegy1 = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        dance1 = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        music1 = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        video1 = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        outside1 = atoi(szChar);
+        szChar = (char*)q_Pop(pQueue);
+        edu1 = atoi(szChar);
+    }
+        food   += food1;
+        funny  += funny1;
+        ennegy += ennegy1;
+        dance  += dance1;
+        music  += music1;
+        video  += video1;
+        outside += outside1;
+        edu    += edu1;
+
+        bzero(szsql,sizeof(szsql));
+        sprintf(szsql,"update t_userdata set food =%d , funny =%d,ennegy =%d,dance=%d , music=%d,  video=%d,  outside=%d , edu=%d where id = %d;"
+        ,food,funny,ennegy , dance,music , video , outside , edu , rq->m_nUserId);
+        cout << szsql <<endl;
+        if(m_sql.UpdateMySql(szsql) == FALSE)
+        {
+            err_str("Update MySql Failed...",-1);
+        }
+}
+
 

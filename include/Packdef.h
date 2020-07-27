@@ -1,9 +1,13 @@
 #ifndef _PACKDEF_H
 #define _PACKDEF_H
 #include <vector>
+#include <unistd.h>
+#include <stdlib.h>
 #include "Queue.h"
 #include "string.h"
 #include "stdint.h"
+#include "wchar.h"
+
 #define BOOL bool
 //=== 网络 ======================================================//
 #define _DEF_PORT 2020
@@ -16,6 +20,7 @@
 #define _DEF_EPOLLSIZE      (4096)
 #define _MAX_PATH           (280 )
 #define _MAX_SIZE           (64  )
+#define _RTMP_SIZE	    (350 )
 #define _DEF_HOBBY_COUNT    (8   )
 #define _MAX_CONTENT_LEN    (4096)
 
@@ -40,14 +45,16 @@
 #define _DEF_PROTOCOL_UPLOAD_RQ                 (_DEF_PROTOCOL_BASE + 5)
 #define _DEF_PROTOCOL_UPLOAD_RS                 (_DEF_PROTOCOL_BASE + 6)
 //=== 4.上传文件块 ===//
-#define _DEF_PROTOCOL_FILEBLOCK_RQ              (_DEF_PROTOCOL_BASE + 7)
-#define _DEF_PROTOCOL_FILEBLOCK_RS              (_DEF_PROTOCOL_BASE + 8)
+#define _DEF_PROTOCOL_UPLOAD_FILEBLOCK_RQ       (_DEF_PROTOCOL_BASE + 7)
+#define _DEF_PROTOCOL_UPLOAD_FILEBLOCK_RS       (_DEF_PROTOCOL_BASE + 8)
 //=== 5.下载 ===//
 #define _DEF_PROTOCOL_DOWNLOAD_RQ               (_DEF_PROTOCOL_BASE + 9)
 #define _DEF_PROTOCOL_DOWNLOAD_RS               (_DEF_PROTOCOL_BASE +10)
 //=== 6.下载文件块 ===//
 #define _DEF_PROTOCOL_DOWNLOAD_FILEBLOCK_RQ     (_DEF_PROTOCOL_BASE +11)
 #define _DEF_PROTOCOL_DOWNLOAD_FILEBLOCK_RS     (_DEF_PROTOCOL_BASE +12)
+//=== 7.点赞 ===//
+#define _DEF_PROTOCOL_PRESSLIKE_RQ 		(_DEF_PROTOCOL_BASE +13)
 
 //=== m_lResult回复状态 =====================================//
 //注册状态
@@ -141,7 +148,7 @@ typedef struct STRU_UPLOAD_FILEBLOCK_RQ
 {
     STRU_UPLOAD_FILEBLOCK_RQ()
     {
-        m_nType = _DEF_PROTOCOL_FILEBLOCK_RQ;
+        m_nType = _DEF_PROTOCOL_UPLOAD_FILEBLOCK_RQ;
         m_nUserId = 0;
         m_nFileId =0;
         m_nVideoId = 0;
@@ -224,6 +231,30 @@ typedef struct STRU_DOWNLOAD_FILEBLOCK_RS
     int64_t    m_nBlockLen;
 }STRU_DOWNLOAD_FILEBLOCK_RS;
 
+typedef struct STRU_PRESSLIKE_RQ
+{
 
+    PackType m_nType;
+    int    m_nUserId;
+    int    m_nVideoId;
+
+}STRU_PRESSLIKE_RQ;
+
+typedef struct STRU_FILEINFO
+{
+    int m_nFileID;
+    int m_VideoID;
+    int64_t m_nFileSize;
+    int64_t m_nPos;
+    int m_nUserId;
+    FILE* pFile;
+    char m_szFilePath[_MAX_PATH];
+    char m_szFileName[_MAX_PATH];
+    char m_szFileType[_MAX_SIZE];
+    char m_Hobby[_DEF_HOBBY_COUNT];
+    char m_UserName[_MAX_SIZE];
+    char m_szRtmp[_MAX_PATH];
+
+}FileInfo;
 #endif
 

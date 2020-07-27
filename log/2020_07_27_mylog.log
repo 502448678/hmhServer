@@ -6,3 +6,7 @@
 2020-07-27 08:48:29.442875 [info]: Login success..  login rs name:123
 2020-07-27 08:48:29.442915 [info]: select id from t_userdata where email = '123';
 2020-07-27 08:48:29.443783 [info]: login rs id:123
+2020-07-27 11:49:25.340527 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-27 11:49:25.340593 [info]: Redis Init:ip = 127.0.0.1
+2020-07-27 11:49:25.342153 [info]: Redis tool init success..
+2020-07-27 11:49:25.421122 [erro]: MySql connect error..
