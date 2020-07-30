@@ -12,7 +12,7 @@ RedisTool * g_Redis = 0;
 FILE *m_pFile;
 int m_nFileSize;
 int m_nPos;
-#define RootPath   "/home/colin/Video/"
+#define RootPath   "/home/hmh/Video/"
 TCPKernel::TCPKernel()
 {
 	m_pTCPNet = new TCPNet(this);
@@ -134,7 +134,7 @@ void TCPKernel::RegisterRq(int clientfd,char* szbuf)
 	
 	list<string> lstStr;
 	//查询数据库中是否有这个人
-	sprintf( szsql , "select email from t_userdata where email = '%s';",rq->m_useremail);
+	sprintf( szsql , "select email from t_UserData where email = '%s';",rq->m_useremail);
 	cout << szsql <<endl;
 	LOG_INFO("%s\n",szsql);
 	m_sql.SelectMySql(szsql , 1 , lstStr );
@@ -144,7 +144,7 @@ void TCPKernel::RegisterRq(int clientfd,char* szbuf)
 	if(lstStr.size() == 0)  
 	{
 		
-		sprintf(szsql , "insert into t_userdata(email,name,password) values('%s','%s','%s');",rq->m_useremail,rq->m_username , rq->m_szPassword);
+		sprintf(szsql , "insert into t_UserData(email,name,password) values('%s','%s','%s');",rq->m_useremail,rq->m_username , rq->m_szPassword);
 
 		cout << szsql << endl;
 		LOG_INFO("%s\n",szsql);
@@ -192,7 +192,7 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 
 	list<string> lstStr;
 	//判斷 是否存在
-	sprintf( szsql , "select password from t_userdata where email = '%s';",rq->m_useremail);
+	sprintf( szsql , "select password from t_UserData where email = '%s';",rq->m_useremail);
 	cout <<szsql<<endl;
 	LOG_INFO("%s\n",szsql);
 
@@ -226,7 +226,7 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 			//登录成功
 
 			char username_sql[_DEF_SQLLEN] = {0};
-			sprintf(username_sql,"select name from t_userdata where email = '%s';",rq->m_useremail);
+			sprintf(username_sql,"select name from t_UserData where email = '%s';",rq->m_useremail);
 			cout << username_sql;
 			LOG_INFO("%s\n",username_sql);
 
@@ -236,7 +236,7 @@ void TCPKernel::LoginRq(int clientfd,char* szbuf)
 			strcpy(rs.m_username ,(const char*)username_rs);
 
 			char userid_sql[_DEF_SQLLEN] = {0};
-			sprintf(userid_sql,"select id from t_userdata where email = '%s';",rq->m_useremail);
+			sprintf(userid_sql,"select id from t_UserData where email = '%s';",rq->m_useremail);
 			cout << userid_sql;
 			LOG_INFO("%s\n",userid_sql);
 
@@ -295,9 +295,10 @@ void TCPKernel::UploadRq(int clientfd,char* szbuf)
 {
 	cout <<"clientfd:"<<clientfd<<" UploadRq.."<<endl;
 	
+	LOG_INFO("clientfd:%d UploadRq..\n",clientfd);
 	STRU_UPLOAD_RQ *rq = (STRU_UPLOAD_RQ *)szbuf;
-	FileInfo *info = (FileInfo*)malloc(sizeof(FileInfo));
-
+//	FileInfo *info = (FileInfo*)malloc(sizeof(FileInfo));
+	FileInfo *info = new FileInfo;
 	info->m_nFileID = rq->m_nFileId ;
 	info->m_nPos = 0;
 	info->m_nFileSize = rq->m_nFileSize;
@@ -311,30 +312,35 @@ void TCPKernel::UploadRq(int clientfd,char* szbuf)
 	Queue* pQueue = NULL;
 	q_Init(&pQueue);
 	//判断角色是否存在
-	sprintf(szsql,"select name from t_userdata where id = %d;",rq->m_UserId);
-	cout << szsql << endl;
+	cout << "rq->m_UserId:"<<rq->m_UserId<<endl;
+	sprintf(szsql,"select name from t_UserData where id = %d;",rq->m_UserId);
+	cout <<"uploadRq:" <<szsql << endl;
 	if(m_sql.SelectMySql(szsql,1,pQueue) == FALSE)
 	{
 		err_str("SelectMySql Falied:",-1);
-		free( info );
+	//	free( info );
+		delete info;
+		info = NULL;
 		q_Destroy(&pQueue);
 		return;
 	}
 	else{
 		char * szUserName = (char*)q_Pop(pQueue);
+		cout <<"szUserName.." << szUserName <<endl;
 		sprintf( info->m_UserName ,"%s",szUserName);
 		sprintf( info->m_szFilePath ,"%sflv/%s/%s",RootPath,szUserName,rq->m_szFileName);
 	}
+	cout <<"info->m_szFilePath:"<<info->m_szFilePath<<endl;
 	info->m_VideoID = 0;
 	info->pFile = fopen(info->m_szFilePath , "w");
 	if( info->pFile )
 	{
-	q_Push( FileQueue , (void*)info);
+		q_Push( FileQueue , (void*)info);
 	}else{
 	free( info );
 	}
 	q_Destroy(&pQueue);
-
+	Log::get_instance()->flush();
 }
 
 
@@ -356,6 +362,7 @@ char* TCPKernel::GetPicNameOfVideo(char* videoName)
 
 void TCPKernel::UploadFileBlockRq(int clientfd,char* szbuf)
 {
+	cout << "clientfd:" << clientfd<<" UploadFileBlockRq.."<<endl;
 	STRU_UPLOAD_FILEBLOCK_RQ *rq = (STRU_UPLOAD_FILEBLOCK_RQ*)szbuf;
 	FileInfo*info = 0;
 	int64_t nlen = 0;
@@ -371,12 +378,14 @@ void TCPKernel::UploadFileBlockRq(int clientfd,char* szbuf)
 	if(info)
 	{
 		//写入
+		cout << "写入" <<endl;
 		nlen = fwrite(rq->m_szFileContent,1,rq->m_nBlockLen,info->pFile);
 		info->m_nPos += nlen;
 		//文件结束关闭
 		if(rq->m_nBlockLen < _MAX_CONTENT_LEN || info->m_nPos >= info->m_nFileSize)
 		{
 			//关闭文件，删除节点
+			cout << "关闭文件，删除节点"<<endl;
 			fclose(info->pFile);
 			if(strcmp(info->m_szFileType,"jpg")!=0)
 			{
@@ -391,7 +400,7 @@ void TCPKernel::UploadFileBlockRq(int clientfd,char* szbuf)
 				char* picPath = GetPicNameOfVideo(info->m_szFilePath);
 				char rtmp[_RTMP_SIZE] = {0};
 				sprintf(rtmp,"//%s/%s",info->m_UserName,info->m_szFileName);
-				sprintf(szsql,"insert into t_videoinfo (userId,videoName,picName,videoPath,picPath,rtmp,food,funny,ennegy,dance,music,video,outside,edu,hotdegree) values(%d,'%s','%s','%s','%s','%s',%d,%d,%d,%d,%d,%d,%d,%d,0);"
+				sprintf(szsql,"insert into t_VideoInfo (userId,videoName,picName,videoPath,picPath,rtmp,food,funny,ennegy,dance,music,video,outside,edu,hotdegree) values(%d,'%s','%s','%s','%s','%s',%d,%d,%d,%d,%d,%d,%d,%d,0);"
                     ,info->m_nUserId , info->m_szFileName , picName ,info->m_szFilePath , picPath , rtmp , info->m_Hobby[0],info->m_Hobby[1],info->m_Hobby[2],info->m_Hobby[3],info->m_Hobby[4],info->m_Hobby[5],info->m_Hobby[6],info->m_Hobby[7]);
 				cout <<szsql<<endl;
 				if(m_sql.UpdateMySql(szsql) == FALSE)
@@ -478,7 +487,7 @@ void TCPKernel::GetDownloadList( Queue*  plist,  int userId)
 	int nCount = 0 ;
 
 	//判断角色是否存在
-	sprintf(szsql,"select count(videoId) from t_videoinfo where t_VideoInfo.videoId not in ( select t_UserRecv.videoId from t_UserRecv where t_UserRecv.UserId = %d );",userId);
+	sprintf(szsql,"select count(videoId) from t_VideoInfo where t_VideoInfo.videoId not in ( select t_UserRecv.videoId from t_UserRecv where t_UserRecv.UserId = %d );",userId);
 	cout << szsql <<endl;
 	if(m_sql.SelectMySql(szsql,1,pQueue) == FALSE)
 	{
@@ -501,7 +510,7 @@ void TCPKernel::GetDownloadList( Queue*  plist,  int userId)
         }
     }
     bzero(szsql,sizeof(szsql));
-    sprintf(szsql,"select videoId , picName , picPath , rtmp from t_videoinfo where t_VideoInfo.videoId not in ( select t_UserRecv.videoId from t_UserRecv where t_UserRecv.userId = %d );",userId);
+    sprintf(szsql,"select videoId , picName , picPath , rtmp from t_VideoInfo where t_VideoInfo.videoId not in ( select t_UserRecv.videoId from t_UserRecv where t_UserRecv.userId = %d );",userId);
     cout << szsql <<endl;
 	if(m_sql.SelectMySql(szsql,4,pQueue) == FALSE)
 	{
@@ -656,7 +665,7 @@ void TCPKernel::PressLikeRq(int clientfd,char*szbuf)
     }
     //更新视频热度
     bzero(szsql,sizeof(szsql));
-    sprintf(szsql,"update t_videoinfo set hotdegree = hotdegree +1 where videoId =%d;" , rq->m_nVideoId);
+    sprintf(szsql,"update t_VideoInfo set hotdegree = hotdegree +1 where videoId =%d;" , rq->m_nVideoId);
     cout << szsql <<endl;
     if(m_sql.UpdateMySql(szsql) == FALSE)
     {
@@ -672,7 +681,7 @@ void TCPKernel::PressLikeRq(int clientfd,char*szbuf)
 	int food , funny ,ennegy ,dance , music,  video,  outside , edu ;
 	int food1 , funny1 ,ennegy1 ,dance1 , music1,  video1,  outside1 , edu1;
 
-	sprintf(szsql,"select food , funny ,ennegy ,dance , music,  video,  outside , edu from t_videoinfo where videoId = %d;", rq->m_nVideoId);
+	sprintf(szsql,"select food , funny ,ennegy ,dance , music,  video,  outside , edu from t_VideoInfo where videoId = %d;", rq->m_nVideoId);
     cout << szsql <<endl;
     if(m_sql.SelectMySql(szsql,8,pQueue) == FALSE)
     {
@@ -698,7 +707,7 @@ void TCPKernel::PressLikeRq(int clientfd,char*szbuf)
         edu = atoi(szChar);
     }
     bzero(szsql,sizeof(szsql));
-    sprintf(szsql,"select food , funny ,ennegy ,dance , music,  video,  outside , edu from t_userdata where id = %d;", rq->m_nUserId);
+    sprintf(szsql,"select food , funny ,ennegy ,dance , music,  video,  outside , edu from t_UserData where id = %d;", rq->m_nUserId);
     cout <<szsql<<endl;
     if(m_sql.SelectMySql(szsql,8,pQueue) == FALSE)
     {
@@ -733,7 +742,7 @@ void TCPKernel::PressLikeRq(int clientfd,char*szbuf)
         edu    += edu1;
 
         bzero(szsql,sizeof(szsql));
-        sprintf(szsql,"update t_userdata set food =%d , funny =%d,ennegy =%d,dance=%d , music=%d,  video=%d,  outside=%d , edu=%d where id = %d;"
+        sprintf(szsql,"update t_UserData set food =%d , funny =%d,ennegy =%d,dance=%d , music=%d,  video=%d,  outside=%d , edu=%d where id = %d;"
         ,food,funny,ennegy , dance,music , video , outside , edu , rq->m_nUserId);
         cout << szsql <<endl;
         if(m_sql.UpdateMySql(szsql) == FALSE)

@@ -1,0 +1,20 @@
+CREATE SCHEMA `hmh_server` ;
+
+create table `hmh_server`.`t_UserData` (
+  `id`  bigint unsigned NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));
+
+ALTER TABLE `hmh_server`.`t_UserData` 
+ADD UNIQUE INDEX `email_UNIQUE` (`email` ASC);
+
+
+create table t_VideoInfo( videoid bigint unsigned  AUTO_INCREMENT primary key , userId bigint unsigned , videoName varchar (300), picName varchar (300), videoPath varchar (300) , picPath varchar (300) ,rtmp varchar (300) , food int, funny int ,ennegy int ,dance int , music int,  video int,  outside int, edu int , hotdegree int);
+
+create table t_UserRecv( userId bigint unsigned , videoid bigint unsigned); 
+
+create table t_UserAction(userId bigint unsigned , videoId bigint unsigned); 
+
+

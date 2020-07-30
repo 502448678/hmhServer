@@ -1,0 +1,159 @@
+2020-07-30 11:17:46.445452 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-30 11:17:46.445482 [info]: Redis Init:ip = 127.0.0.1
+2020-07-30 11:17:46.446235 [info]: Redis tool init success..
+2020-07-30 11:17:46.450404 [info]: MySql connect success..
+2020-07-30 11:17:46.451370 [info]: ThreadPool init success..
+2020-07-30 11:17:46.451699 [info]: Network init success..
+2020-07-30 11:28:44.741227 [info]: removefd:9
+2020-07-30 11:30:49.926238 [info]: removefd:9
+2020-07-30 11:32:05.409307 [info]: removefd:9
+2020-07-30 11:34:08.919523 [info]: removefd:9
+2020-07-30 11:36:08.837681 [info]: removefd:9
+2020-07-30 11:38:35.395660 [info]: removefd:9
+2020-07-30 11:39:05.793355 [info]: clientfd:9 ===> LoginRq
+2020-07-30 11:39:05.793449 [info]: select password from t_UserData where email = '123';
+2020-07-30 11:39:05.797309 [info]: select name from t_UserData where email = '123';
+2020-07-30 11:39:05.800049 [info]: Login success..  login rs name:123
+2020-07-30 11:39:05.800093 [info]: select id from t_UserData where email = '123';
+2020-07-30 11:39:05.801034 [info]: login rs id:123
+2020-07-30 11:39:54.457670 [info]: removefd:9
+2020-07-30 11:39:54.457746 [info]: removefd:9
+2020-07-30 11:42:42.495560 [info]: removefd:9
+2020-07-30 11:44:12.408268 [info]: removefd:9
+2020-07-30 11:44:53.532075 [info]: removefd:9
+2020-07-30 11:47:53.063851 [info]: removefd:9
+2020-07-30 11:49:59.460433 [info]: removefd:9
+2020-07-30 11:52:04.189209 [info]: clientfd:9 ===> LoginRq
+2020-07-30 11:52:04.189352 [info]: select password from t_UserData where email = '123';
+2020-07-30 11:52:04.190671 [info]: select name from t_UserData where email = '123';
+2020-07-30 11:52:04.191689 [info]: Login success..  login rs name:123
+2020-07-30 11:52:04.191738 [info]: select id from t_UserData where email = '123';
+2020-07-30 11:52:04.192522 [info]: login rs id:123
+2020-07-30 11:52:09.732593 [info]: removefd:9
+2020-07-30 11:59:03.168635 [info]: removefd:9
+2020-07-30 13:53:04.914553 [info]: removefd:9
+2020-07-30 13:54:12.898133 [info]: removefd:9
+2020-07-30 13:54:53.527679 [info]: clientfd:9 ===> LoginRq
+2020-07-30 13:54:53.527859 [info]: select password from t_UserData where email = '123';
+2020-07-30 13:54:53.528710 [info]: select name from t_UserData where email = '123';
+2020-07-30 13:54:53.529496 [info]: Login success..  login rs name:123
+2020-07-30 13:54:53.529531 [info]: select id from t_UserData where email = '123';
+2020-07-30 13:54:53.530194 [info]: login rs id:123
+2020-07-30 13:56:01.929076 [info]: removefd:9
+2020-07-30 14:01:58.090862 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:01:58.090932 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:01:58.092060 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:01:58.093002 [info]: Login success..  login rs name:123
+2020-07-30 14:01:58.093044 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:01:58.093995 [info]: login rs id:123
+2020-07-30 14:02:18.883255 [info]: removefd:9
+2020-07-30 14:04:29.929430 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:04:29.929495 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:04:29.930234 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:04:29.930954 [info]: Login success..  login rs name:123
+2020-07-30 14:04:29.930993 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:04:29.931738 [info]: login rs id:123
+2020-07-30 14:04:38.885852 [info]: removefd:9
+2020-07-30 14:06:10.038593 [info]: removefd:9
+2020-07-30 14:06:10.038745 [info]: removefd:9
+2020-07-30 14:06:45.611076 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:06:45.611242 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:06:45.611903 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:06:45.612864 [info]: Login success..  login rs name:123
+2020-07-30 14:06:45.612906 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:06:45.613943 [info]: login rs id:123
+2020-07-30 14:06:47.940855 [info]: removefd:9
+2020-07-30 14:07:03.785139 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:07:03.785450 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:07:03.786643 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:07:03.787401 [info]: Login success..  login rs name:123
+2020-07-30 14:07:03.787440 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:07:03.788225 [info]: login rs id:123
+2020-07-30 14:07:18.772856 [info]: removefd:9
+2020-07-30 14:07:51.408120 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:07:51.408244 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:07:51.408949 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:07:51.409593 [info]: Login success..  login rs name:123
+2020-07-30 14:07:51.409626 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:07:51.410250 [info]: login rs id:123
+2020-07-30 14:07:54.770476 [info]: removefd:9
+2020-07-30 14:07:54.770476 [info]: removefd:9
+2020-07-30 14:08:43.855321 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:08:43.855392 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:08:43.856291 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:08:43.857335 [info]: Login success..  login rs name:123
+2020-07-30 14:08:43.857370 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:08:43.858212 [info]: login rs id:123
+2020-07-30 14:08:47.313927 [info]: removefd:9
+2020-07-30 14:08:47.313932 [info]: removefd:9
+2020-07-30 14:09:41.453424 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:09:41.453539 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:09:41.454736 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:09:41.455735 [info]: Login success..  login rs name:123
+2020-07-30 14:09:41.455815 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:09:41.456755 [info]: login rs id:123
+2020-07-30 14:09:45.964165 [info]: removefd:9
+2020-07-30 14:09:45.964301 [info]: removefd:9
+2020-07-30 14:10:07.113667 [info]: removefd:9
+2020-07-30 14:10:20.926085 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:10:20.926192 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:10:20.927566 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:10:20.928442 [info]: Login success..  login rs name:123
+2020-07-30 14:10:20.928487 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:10:20.929295 [info]: login rs id:123
+2020-07-30 14:10:30.264758 [info]: removefd:9
+2020-07-30 14:10:30.264784 [info]: removefd:9
+2020-07-30 14:11:16.317841 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:11:16.318112 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:11:16.319106 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:11:16.319754 [info]: Login success..  login rs name:123
+2020-07-30 14:11:16.319799 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:11:16.320610 [info]: login rs id:123
+2020-07-30 14:11:26.518731 [info]: removefd:9
+2020-07-30 14:11:26.518795 [info]: removefd:9
+2020-07-30 14:13:02.894321 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:13:02.894387 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:13:02.895237 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:13:02.896194 [info]: Login success..  login rs name:123
+2020-07-30 14:13:02.896236 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:13:02.897207 [info]: login rs id:123
+2020-07-30 14:13:15.770442 [info]: removefd:9
+2020-07-30 14:13:33.814522 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:13:33.814723 [info]: select password from t_UserData where email = '1234';
+2020-07-30 14:13:33.815565 [info]: login user not exist
+2020-07-30 14:15:18.523842 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-30 14:15:18.524268 [info]: Redis Init:ip = 127.0.0.1
+2020-07-30 14:15:18.525040 [info]: Redis tool init success..
+2020-07-30 14:15:18.527858 [info]: MySql connect success..
+2020-07-30 14:15:18.528811 [info]: ThreadPool init success..
+2020-07-30 14:15:18.528931 [info]: Network init success..
+2020-07-30 14:15:31.267093 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:15:31.267232 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:15:31.269390 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:15:31.269950 [info]: Login success..  login rs name:123
+2020-07-30 14:15:31.269987 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:15:31.270680 [info]: login rs id:123
+2020-07-30 14:15:54.893957 [info]: removefd:9
+2020-07-30 14:23:06.456566 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:23:06.456651 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:23:06.457477 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:23:06.458200 [info]: Login success..  login rs name:123
+2020-07-30 14:23:06.458232 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:23:06.458974 [info]: login rs id:123
+2020-07-30 14:23:20.161126 [info]: removefd:9
+2020-07-30 14:27:33.462758 [info]: removefd:9
+2020-07-30 14:33:22.128271 [info]: removefd:9
+2020-07-30 14:35:02.324988 [info]: clientfd:9 ===> LoginRq
+2020-07-30 14:35:02.325111 [info]: select password from t_UserData where email = '123';
+2020-07-30 14:35:02.326078 [info]: select name from t_UserData where email = '123';
+2020-07-30 14:35:02.327087 [info]: Login success..  login rs name:123
+2020-07-30 14:35:02.327139 [info]: select id from t_UserData where email = '123';
+2020-07-30 14:35:02.328039 [info]: login rs id:123
+2020-07-30 14:35:39.969911 [info]: removefd:9
+2020-07-30 14:59:56.055824 [info]: removefd:9
+2020-07-30 15:02:14.053504 [info]: clientfd:9 ===> LoginRq
+2020-07-30 15:02:14.053799 [info]: select password from t_UserData where email = '123';
+2020-07-30 15:02:14.054960 [info]: select name from t_UserData where email = '123';
+2020-07-30 15:02:14.055794 [info]: Login success..  login rs name:123
+2020-07-30 15:02:14.055836 [info]: select id from t_UserData where email = '123';
+2020-07-30 15:02:14.056672 [info]: login rs id:123

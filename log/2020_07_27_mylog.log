@@ -10,3 +10,9 @@
 2020-07-27 11:49:25.340593 [info]: Redis Init:ip = 127.0.0.1
 2020-07-27 11:49:25.342153 [info]: Redis tool init success..
 2020-07-27 11:49:25.421122 [erro]: MySql connect error..
+2020-07-27 12:01:45.150492 [info]: ========== hPlayer Server Begin Running .. =============
+2020-07-27 12:01:45.150526 [info]: Redis Init:ip = 127.0.0.1
+2020-07-27 12:01:45.151020 [info]: Redis tool init success..
+2020-07-27 12:01:45.174465 [info]: MySql connect success..
+2020-07-27 12:01:45.175222 [info]: ThreadPool init success..
+2020-07-27 12:01:45.175450 [info]: Network init success..

@@ -88,7 +88,7 @@
 enum Sex{sex_male,sex_female};
 //=== 数据包 ====================================================//
 typedef char PackType;
-
+#pragma pack(4)
 
 //登录or注册请求包
 typedef struct
